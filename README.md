@@ -36,7 +36,7 @@ Nosso objetivo é transformar eventos em experiências sociais, conectando pesso
 - **Gerenciamento de estados:** Context API + Hooks  
 - **Design System:** [Tailwind CSS / NativeWind](https://www.nativewind.dev/)  
 - **Validações:** [Zod](https://zod.dev/)  
-- **Imagens:** [Expo Image](https://docs.expo.dev/versions/latest/sdk/image/) + [TMDb API](https://www.themoviedb.org/) para mídia  
+- **Imagens:** [Expo Image](https://docs.expo.dev/versions/latest/sdk/image/) 
 - **Ícones:** [Lucide React Native](https://lucide.dev/)  
 
 ---
