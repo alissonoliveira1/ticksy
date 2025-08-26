@@ -1,50 +1,59 @@
-# Welcome to your Expo app 👋
+# 🎟️ Ticksy
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Ticksy** é um aplicativo de eventos moderno que vai além da compra de ingressos.  
+Nosso objetivo é transformar eventos em experiências sociais, conectando pessoas, grupos e comunidades em torno daquilo que amam.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Funcionalidades
 
-   ```bash
-   npm install
-   ```
+- **Exploração de eventos**  
+  Descubra shows, festivais, peças de teatro, esportes, conferências, festas e muito mais.  
+  Filtros por **categoria**, **localização**, **data** e **preço**.
 
-2. Start the app
+- **Compra de ingressos**  
+  Ingressos digitais com **QR Code** integrado.  
+  Diferentes tipos: *Standard*, *VIP*, *Early-bird*.  
+  Gestão de ingressos e status (*válido, usado, expirado*).
 
-   ```bash
-   npx expo start
-   ```
+- **Experiência social (Ticksy Connect)**  
+  - **Match de eventos** → veja quem mais vai ao mesmo evento.  
+  - **Compartilhar assento** → crie ou participe de grupos para se organizar com amigos.  
+  - **Mapa social** → veja onde seus amigos estarão no evento (se permitido).  
 
-In the output, you'll find options to open the app in a
+- **Categorias de eventos**  
+  Música, Esporte, Teatro, Conferência, Festival, Cinema, Festa, Comédia, Gastronomia, Tecnologia, Universitário e muito mais.  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **Organizadores**  
+  Perfis de organizadores, gestão de eventos, métricas de ingressos vendidos e destaque na plataforma.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 🛠️ Tecnologias
 
-When you're ready, run:
+- **Frontend Mobile:** [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/)  
+- **Backend (planejado):** Node.js / Java / Laravel (a definir)  
+- **Gerenciamento de estados:** Context API + Hooks  
+- **Design System:** [Tailwind CSS / NativeWind](https://www.nativewind.dev/)  
+- **Validações:** [Zod](https://zod.dev/)  
+- **Imagens:** [Expo Image](https://docs.expo.dev/versions/latest/sdk/image/) + [TMDb API](https://www.themoviedb.org/) para mídia  
+- **Ícones:** [Lucide React Native](https://lucide.dev/)  
+
+---
+
+## 🚀 Instalação e Execução
 
 ```bash
-npm run reset-project
-```
+# clone o repositório
+git clone https://github.com/seu-usuario/ticksy.git
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+# entre na pasta
+cd ticksy
 
-## Learn more
+# instale as dependências
+npm install
+# ou
+yarn install
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# execute em desenvolvimento
+npx expo start
