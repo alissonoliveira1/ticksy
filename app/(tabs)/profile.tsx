@@ -1,34 +1,34 @@
 import {
-    Avatar,
-    AvatarBadge,
-    AvatarFallbackText,
-    AvatarImage,
+  Avatar,
+  AvatarBadge,
+  AvatarFallbackText,
+  AvatarImage,
 } from "@/components/ui/avatar";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import {
-    Bell,
-    ChevronRight,
-    CircleQuestionMark,
-    CreditCard,
-    Globe,
-    LogOut,
-    MapPin,
-    MessageSquareWarning,
-    Pencil,
-    Shield,
-    Sparkles,
-    User,
+  Bell,
+  ChevronRight,
+  CircleQuestionMark,
+  CreditCard,
+  Globe,
+  LogOut,
+  MapPin,
+  MessageSquareWarning,
+  Pencil,
+  Shield,
+  Sparkles,
+  User,
 } from "lucide-react-native";
 import {
-    Platform,
-    StatusBar as RNStatusBar,
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Platform,
+  StatusBar as RNStatusBar,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 interface MenuItemProps {
   icon: React.ReactNode;
@@ -72,49 +72,46 @@ export default function Profile() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-   <View className="bg-indigo-500" style={{ height: STATUS_BAR_HEIGHT }} />
-            <StatusBar style="light" />
+      <View className="bg-indigo-500" style={{ height: STATUS_BAR_HEIGHT }} />
+      <StatusBar style="light" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="relative" style={styles.container}>
-           <View className=" w-full h-36   rounded-b-[3rem] overflow-hidden">
+          <View className=" w-full h-auto   rounded-b-[3rem] overflow-hidden">
             <LinearGradient
-          colors={["#6366F1", "#8B5CF6"]}
-          className=" p-5 flex-row items-center rounded-b-[3rem] "
-          style={{ flex: 1, }}
-         
-        >
-         
-            <View style={styles.containerProfile}>
-             <Avatar size="md">
-  
-      <AvatarImage
-        source={{
-          uri: "https://coisadefotografa.com/wp-content/uploads/2021/09/como-ter-fotos-mais-nitidas-1536x1024.jpg"
-        }}
-      />   
-       <AvatarFallbackText>Jane Doe</AvatarFallbackText>
-      <AvatarBadge />
-    </Avatar>
-              <View style={styles.viewText}>
-                <Text
-                  className="text-white"
-                  style={{ fontSize: 15, fontWeight: "bold" }}
-                >
-                  Alisson de Oliveira
-                </Text>
-                <Text className="text-white text-xs">
-                  Alissonoliveria202020@gmail.com
-                </Text>
+              colors={["#6366F1", "#8B5CF6"]}
+              className=" p-5 flex-row items-center rounded-b-[3rem] "
+              style={{ flex: 1 }}
+            >
+              <View style={styles.containerProfile}>
+                <Avatar size="md">
+                  <AvatarFallbackText>Jane Doe</AvatarFallbackText>
+                  <AvatarImage
+                    source={{
+                      uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                    }}
+                  />
+                  <AvatarBadge />
+                </Avatar>
+                <View style={styles.viewText}>
+                  <Text
+                    className="text-white"
+                    style={{ fontSize: 15, fontWeight: "bold" }}
+                  >
+                    Alisson de Oliveira
+                  </Text>
+                  <Text className="text-white text-xs">
+                    Alissonoliveria202020@gmail.com
+                  </Text>
+                </View>
               </View>
-            </View>
-            <View>
               <View>
-                <Pencil size={20} color={"white"} />
+                <View>
+                  <Pencil size={20} color={"white"} />
+                </View>
               </View>
-            </View>
-          </LinearGradient>
-</View>
-          <View className=" rounded-3xl bottom-10 flex-row justify-around relative w-11/12 h-20 bg-white shadow-xl shadow-gray-500">
+            </LinearGradient>
+          </View>
+          <View className=" rounded-3xl bottom-3 flex-row justify-around relative w-11/12 h-20 bg-white shadow-xl shadow-gray-500">
             <View className="flex-col items-center justify-center">
               <View>
                 <Text className="text-blue-500 font-bold text-xl">12</Text>
