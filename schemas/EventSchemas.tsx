@@ -2,17 +2,22 @@ import {
   Book,
   Briefcase,
   Coffee,
+  ContactRound,
   Cpu,
   Drama,
   Film,
   Gift, GraduationCap,
   Heart,
-  LayoutGrid, Music,
+  LayoutGrid,
+  Mail,
+  Music,
+  Network,
   Palette,
   PartyPopper,
   Smile,
   Ticket,
   Users,
+  UsersRound,
   Volleyball
 } from "lucide-react-native";
 import { FC } from "react";
@@ -67,3 +72,24 @@ export const categories: Category[] = [
   { key: "charity", label: "Caridade", Icon: Gift },
   { key: "university", label: "Universitário", Icon: GraduationCap },
 ];
+
+export const CategoryConnectSchema = z.enum([
+  "Sugestões",
+  "Meus Contatos",
+  "Convites",
+  "Comunidades",
+]);
+
+export type ConnectType = z.infer<typeof CategoryConnectSchema>;
+
+export interface CategoryConnect {
+  key: ConnectType;
+  label: string;
+  Icon: FC<any>;
+}
+export const ConnectArrey: CategoryConnect[] = [
+  { key: "Sugestões", label: "Sugestões", Icon:   UsersRound  },
+  { key: "Meus Contatos", label: "Meus Contatos", Icon: ContactRound },
+  { key: "Convites", label: "Convites", Icon: Mail },
+  { key: "Comunidades", label: "Comunidades", Icon: Network  },
+]

@@ -51,22 +51,22 @@ export const TicketsUi = ({event, onPress, variant = 'standard'}:EventCardProps)
           <View className="flex-row items-center justify-between">
             <View className="bg-indigo-500 rounded-full p-1">
               <View>
-                <Music color={"white"} size={12} />
+                <Music color={"white"} size={10} />
               </View>
             </View>
             <View style={{backgroundColor:availability.color}} className="w-3 h-3 rounded-full "></View>
           </View>
         </View>
-        <View>
+        <View className="pb-1">
           <Text className="line-clamp-2 font-semibold">
             {event.title}
           </Text>
         </View>
-        <View>
-          <Text className="text-sm">{event.address}</Text>
+        <View className="pb-1">
+          <Text className="text-sm text-gray-600">{event.address}</Text>
         </View>
         <View className="flex-row justify-between items-center">
-          <Text className="text-sm">  {event.price.currency} {event.price.min},00</Text>
+          <Text className="text-sm text-indigo-500 font-extrabold">{event.price.currency} {event.price.min},00</Text>
           <Text className="text-sm">{event.time}</Text>
         </View>
       </View>

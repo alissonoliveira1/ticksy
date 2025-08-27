@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { House, Search, Ticket, User } from 'lucide-react-native';
+import { House, Ticket, User, Users } from 'lucide-react-native';
 import '../../global.css';
 export default function TabLayout() {
   return (
@@ -13,15 +13,15 @@ export default function TabLayout() {
     >
       <Tabs.Screen name="index"   
        options={{
-          title: 'Home',
+          title: 'Inicio',
           
          tabBarIcon:  ({color}) => (
              <House color={color} size={20} />
           ),
         }}/>
-      <Tabs.Screen name="search" options={{ title: 'pesquisa',
+      <Tabs.Screen name="ticksyConnect" options={{ title: 'Connect',
         tabBarIcon: ({color}) => (
-          <Search  color={color} size={20} />
+          <Users  color={color} size={20} />
         )
        }} />
       <Tabs.Screen name="myTicket" options={{ title: 'Meu ingresso',

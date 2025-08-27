@@ -2,13 +2,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { CalendarDays, MapPin, QrCode } from "lucide-react-native";
 import {
-    Platform,
-    StatusBar as RNStatusBar,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  Platform,
+  StatusBar as RNStatusBar,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 const tickets = [
@@ -103,15 +103,27 @@ export default function MyTicket() {
     <SafeAreaView className="flex-1  bg-white">
       <View className="bg-indigo-500" style={{ height: STATUS_BAR_HEIGHT }} />
       <StatusBar style="light" />
-      <ScrollView className="p-4" showsVerticalScrollIndicator={false}>
-        <View className="justify-start items-start ">
-          <Text className="text-lg">Meus Ingressos</Text>
-          <Text>5</Text>
+      <ScrollView className="" showsVerticalScrollIndicator={false}>
+           <View className="w-full">
+          <View className=" flex-row rounded-b-[3rem] overflow-hidden">
+            <LinearGradient
+              colors={["#6366F1", "#8B5CF6"]}
+              className=" p-5 flex-row items-center rounded-b-[3rem] "
+              style={{ flex: 1 }}
+            >
+             
+              <View className="items-center justify-center flex-1">
+                <View>
+                    <Text className="text-white font-bold text-xl">Meus ingressos</Text>
+                </View>
+              </View>
+            </LinearGradient >
+          </View>
         </View>
 
         <View
           className="flex-col
-    gap-4 mt-4"
+    gap-4 mt-4 px-4"
         >
           {tickets.map((ticket) => (
             <TouchableOpacity
