@@ -1,16 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { CalendarDays, MapPin, QrCode } from "lucide-react-native";
-import {
-  Platform,
-  StatusBar as RNStatusBar,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 const tickets = [
   {
     id: "1",
@@ -62,8 +54,6 @@ const tickets = [
   },
 ];
 export default function MyTicket() {
-  const STATUS_BAR_HEIGHT =
-    Platform.OS === "android" ? RNStatusBar.currentHeight : 44;
   const date = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("pt-BR", {
@@ -101,23 +91,23 @@ export default function MyTicket() {
 
   return (
     <SafeAreaView className="flex-1  bg-white">
-      <View className="bg-indigo-500" style={{ height: STATUS_BAR_HEIGHT }} />
-      <StatusBar style="light" />
+      <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <ScrollView className="" showsVerticalScrollIndicator={false}>
-           <View className="w-full">
+        <View className="w-full">
           <View className=" flex-row rounded-b-[3rem] overflow-hidden">
             <LinearGradient
               colors={["#6366F1", "#8B5CF6"]}
               className=" p-5 flex-row items-center rounded-b-[3rem] "
               style={{ flex: 1 }}
             >
-             
               <View className="items-center justify-center flex-1">
                 <View>
-                    <Text className="text-white font-bold text-xl">Meus ingressos</Text>
+                  <Text className="text-white font-bold text-xl">
+                    Meus ingressos
+                  </Text>
                 </View>
               </View>
-            </LinearGradient >
+            </LinearGradient>
           </View>
         </View>
 
@@ -165,7 +155,9 @@ export default function MyTicket() {
                     </View>
                     <View>
                       <View
-                        className={`${getStatusColor(ticket.status)} w-auto px-2 py-1 rounded-full`}
+                        className={`${getStatusColor(
+                          ticket.status
+                        )} w-auto px-2 py-1 rounded-full`}
                       >
                         <Text className="text-white text-xs">
                           {getStatusText(ticket.status)}

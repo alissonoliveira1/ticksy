@@ -21,15 +21,13 @@ import {
   User,
 } from "lucide-react-native";
 import {
-  Platform,
-  StatusBar as RNStatusBar,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 interface MenuItemProps {
   icon: React.ReactNode;
   title: string;
@@ -41,8 +39,6 @@ export default function Profile() {
   const handleMenuPress = (item: string) => {
     console.log(`Menu sélectionné: ${item}`);
   };
-  const STATUS_BAR_HEIGHT =
-    Platform.OS === "android" ? RNStatusBar.currentHeight : 44;
 
   function MenuItem({
     icon,
@@ -54,7 +50,7 @@ export default function Profile() {
     return (
       <TouchableOpacity className="w-full border-gray-100 border flex-row justify-between items-center h-30  rounded-sm mt-2">
         <View className="flex-row items-center justify-center p-3">
-          <View className="pr-4 text-blue-500">{icon}</View>
+          <View className="pr-4 text-indigo-500">{icon}</View>
           <View>
             <Text className="text-gray-500 font-semibold text-base ">
               {title}
@@ -72,8 +68,7 @@ export default function Profile() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="bg-indigo-500" style={{ height: STATUS_BAR_HEIGHT }} />
-      <StatusBar style="light" />
+      <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="relative" style={styles.container}>
           <View className=" w-full h-auto   rounded-b-[3rem] overflow-hidden">
@@ -87,7 +82,7 @@ export default function Profile() {
                   <AvatarFallbackText>Jane Doe</AvatarFallbackText>
                   <AvatarImage
                     source={{
-                      uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                      uri: "https://i.ibb.co/mC3m3gFF/00100s-PORTRAIT-00100-BURST20220226153400411-COVER.jpg",
                     }}
                   />
                   <AvatarBadge />
@@ -114,7 +109,7 @@ export default function Profile() {
           <View className=" rounded-3xl bottom-3 flex-row justify-around relative w-11/12 h-20 bg-white shadow-xl shadow-gray-500">
             <View className="flex-col items-center justify-center">
               <View>
-                <Text className="text-blue-500 font-bold text-xl">12</Text>
+                <Text className="text-indigo-500 font-bold text-xl">12</Text>
               </View>
               <View>
                 <Text className="text-gray-500 font-semibold">Ingressos</Text>
@@ -122,7 +117,7 @@ export default function Profile() {
             </View>
             <View className="flex-col items-center justify-center">
               <View>
-                <Text className="text-blue-500 font-bold text-xl">2</Text>
+                <Text className="text-indigo-500 font-bold text-xl">2</Text>
               </View>
               <View>
                 <Text className="text-gray-500 font-semibold">Eventos</Text>
@@ -130,7 +125,7 @@ export default function Profile() {
             </View>
             <View className="flex-col items-center justify-center">
               <View>
-                <Text className="text-blue-500 font-bold text-xl">8</Text>
+                <Text className="text-indigo-500 font-bold text-xl">8</Text>
               </View>
               <View>
                 <Text className="text-gray-500 font-semibold">Favoritos</Text>
