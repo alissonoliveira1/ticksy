@@ -1,7 +1,7 @@
 import { Event } from "@/schemas/TicketSchamas";
 import { Image } from "expo-image";
 import { Music } from "lucide-react-native";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { SkeletonTicketUi } from "./SkeletonTicketUi";
 interface EventCardProps {
   event: Event[];
@@ -40,7 +40,7 @@ export const TicketsUi = ({loading,activeErros, eventTitle, event, onPress, vari
   const availability = getAvailabilityStatus();
 
     return(
-   <View className=" w-52 h-auto elevation-sm rounded-[1rem] shadow-xl shadow-black  m-3 ">
+   <TouchableOpacity onPress={() => onPress(item)}  className=" w-52 h-auto elevation-sm rounded-[1rem] shadow-xl shadow-black  m-3 ">
       <View className="w-full relative h-[7.3rem] overflow-hidden ">
         <View className="rounded-t-[1rem] overflow-hidden ">
           <Image
@@ -81,7 +81,7 @@ export const TicketsUi = ({loading,activeErros, eventTitle, event, onPress, vari
           <Text className="text-sm">{item.time}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
     )
   }
   return (

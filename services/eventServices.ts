@@ -10,7 +10,7 @@ const mockEvents: Event[] = [
     date: '2025-08-20',
     time: '20:00',
     venue: 'Parque de Exposições',
-    address: 'Parque de Exposições',
+    address: 'Av. Luís Viana Filho, 1590 - Itapuã, Salvador - BA, 41730-101',
     category: 'music',
     price: { min: 45, max: 120, currency: 'R$' },
     availableTickets: 250,
@@ -27,7 +27,7 @@ const mockEvents: Event[] = [
     date: '2025-08-25',
     time: '21:00',
     venue: 'Estadio pituaçu',
-    address: 'pituaçu, salvador',
+    address: 'Rua dos Rádioamadores, 159-357 - Pituaçu, Salvador - BA, 41740-090',
     category: 'sport',
     price: { min: 80, max: 300, currency: 'R$' },
     availableTickets: 1200,
@@ -44,7 +44,7 @@ const mockEvents: Event[] = [
     date: '2025-09-05',
     time: '09:00',
     venue: 'Parque de Exposições',
-    address: 'Parque de Exposições',
+    address: 'Av. Luís Viana Filho, 1590 - Itapuã, Salvador - BA, 41730-101',
     category: 'conference',
     price: { min: 25, max: 150, currency: 'R$' },
     availableTickets: 800,
@@ -61,7 +61,7 @@ const mockEvents: Event[] = [
     date: '2025-08-30',
     time: '20:30',
     venue: 'Parque de Exposições',
-    address: 'Parque de Exposições',
+    address: 'Av. Luís Viana Filho, 1590 - Itapuã, Salvador - BA, 41730-101',
     category: 'comedy',
     price: { min: 30, max: 65, currency: 'R$' },
     availableTickets: 150,
@@ -72,8 +72,12 @@ const mockEvents: Event[] = [
   }
 ];
 export class EventService {
+ static async getById(id: string): Promise<Event | null> {
+  const event = mockEvents.find(event => event.id === id);
+  return event ?? null;
+}
   static async getFeaturedEvents(): Promise<Event[]> {
-    // Simuler un délai réseau
+    
     await new Promise(resolve => setTimeout(resolve, 500));
     return mockEvents.filter(event => event.featured);
   }

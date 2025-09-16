@@ -11,6 +11,7 @@ export default function Layout() {
     
     > 
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="TicketDetails" options={{ title: 'Detalhes do Evento' }} />
     </Stack>
     </GluestackUIProvider>
   );

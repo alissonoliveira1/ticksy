@@ -5,6 +5,7 @@ import { TicketsUi } from "@/components/ui/ticketsUi";
 import { Event } from "@/schemas/TicketSchamas";
 import { EventService } from "@/services/eventServices";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SearchIcon } from "lucide-react-native";
 import { useEffect, useState } from "react";
@@ -18,7 +19,12 @@ export default function Index() {
   const [erros, setErros] = useState("");
   const [activeErros, setActiveErros] = useState(false);
   const [loading, setLoading] = useState(false);
-  const handleEventPress = (event: Event) => {};
+  const handleEventPress = (event: Event) => {
+    console.log("Evento pressionado:", event);
+    router.push({pathname: "/TicketDetails", params: { id: event.id }});
+
+  };
+
   useEffect(() => {
     const loadEvents = async () => {
       try {
