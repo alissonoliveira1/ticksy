@@ -28,8 +28,6 @@ export const TicketsUi = ({loading,activeErros, eventTitle, event, onPress, vari
     return colors[category] || ['#B39DDB', '#9575CD'];
   };
 
-
-
   const RenderItem = ({item}: {item:Event}) => {
        const getAvailabilityStatus = () => {
     const percentage = (item.availableTickets / item.totalTickets) * 100;
@@ -74,7 +72,7 @@ export const TicketsUi = ({loading,activeErros, eventTitle, event, onPress, vari
           </Text>
         </View>
         <View className="pb-1">
-          <Text className="text-sm text-gray-600">{item.address}</Text>
+          <Text className="text-sm text-gray-600">{item.venue}</Text>
         </View>
         <View className="flex-row justify-between items-center">
           <Text className="text-sm text-indigo-500 font-extrabold">{item.price.currency} {item.price.min},00</Text>

@@ -17,6 +17,7 @@ export const EventSchema = z.object({
   price: z.object({
     min: z.number(),
     max: z.number(),
+     premium: z.number().optional(),
     currency: z.string(),
   }),
   availableTickets: z.number(),
@@ -53,6 +54,7 @@ export const SearchFiltersSchema = z.object({
     .object({
       min: z.number(),
       max: z.number(),
+      premium: z.number(),
     })
     .optional(),
   location: z.string().optional(),
