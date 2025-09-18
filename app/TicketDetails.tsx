@@ -141,8 +141,8 @@ export default function TicketDetails() {
 
 
 
-  console.log(event);
-  console.log("ID do evento:", id);
+
+ 
   const handleScroll = (event: any) => {
     setScrolly(event.nativeEvent.contentOffset.y);
   };
