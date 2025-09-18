@@ -1,30 +1,106 @@
 import {
-    Avatar,
-    AvatarBadge,
-    AvatarFallbackText,
-    AvatarImage,
+  Avatar,
+  AvatarBadge,
+  AvatarFallbackText,
+  AvatarImage,
 } from "@/components/ui/avatar";
+import { TicketPay } from "@/components/ui/ticketPay";
 import { Event } from "@/schemas/TicketSchamas";
 import { EventService } from "@/services/eventServices";
 import { Image } from "expo-image";
-import { useLocalSearchParams } from "expo-router";
-import { Building2, CalendarDays, Check, ChevronRight, MapPin } from "lucide-react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import {
+  ArrowLeft,
+  Building2,
+  CalendarDays,
+  ChevronRight,
+  MapPin,
+  Minus,
+  Plus,
+  Share2,
+  ShoppingCart,
+} from "lucide-react-native";
 import { useEffect, useState } from "react";
 import {
-    Dimensions,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Dimensions,
+  Linking,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+interface TicketType {
+  id: string;
+  name: string;
+  currency: string;
+  price: number;
+  description: string;
+  benefits: string[];
+  available: number;
+  total: number;
+  color: string[];
+}
 export default function TicketDetails() {
+  const navigation = useNavigation();
+  const [scrollY, setScrolly] = useState(0);
   const width = Dimensions.get("window").width;
   const height = Dimensions.get("window").height;
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
+  const [valorTotal, setValorTotal] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [selectedTicket, setSelectedTicket] = useState('');
+
+  const mockTicketTypes: TicketType[] = [
+    {
+      id: "1",
+      name: "Standard",
+      currency: "R$",
+      price: 45,
+      description: "Entrada geral com acesso completo ao evento",
+      benefits: ["Acesso ao evento", "Área geral", "Banheiros"],
+      available: 150,
+      total: 200,
+      color: ["#10B981", "#34D399"],
+    },
+    {
+      id: "2",
+      name: "VIP",
+      currency: "R$",
+      price: 85,
+      description: "Experiência premium com benefícios exclusivos",
+      benefits: [
+        "Acesso ao evento",
+        "Área VIP",
+        "Bar exclusivo",
+        "Estacionamento grátis",
+      ],
+      available: 25,
+      total: 50,
+      color: ["#F59E0B", "#FBBF24"],
+    },
+    {
+      id: "3",
+      name: "Premium",
+      currency: "R$",
+      price: 120,
+      description: "Experiência completa com todos os benefícios",
+      benefits: [
+        "Acesso ao evento",
+        "Área Premium",
+        "Meet & Greet",
+        "Catering incluso",
+        "Lembrança exclusiva",
+      ],
+      available: 8,
+      total: 20,
+      color: ["#8B5CF6", "#A78BFA"],
+    },
+  ];
   useEffect(() => {
     if (!id) return;
 
@@ -46,97 +122,150 @@ export default function TicketDetails() {
     event?.totalTickets === undefined
   )
     return null;
-  const availability = (event?.availableTickets / event?.totalTickets) * 100;
+ 
   const date2 = new Date(event?.date || "");
   const date = date2.toLocaleDateString("pt-BR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+  const handleTotal = (ev:string) => {
+   setSelectedTicket(ev)
+    
+  }
+ 
+    const selected = mockTicketTypes.find(ticket => ticket.id === selectedTicket);
+    const total = selected ? selected.price * quantity : 0
+  
+
+
+
+
   console.log(event);
   console.log("ID do evento:", id);
+  const handleScroll = (event: any) => {
+    setScrolly(event.nativeEvent.contentOffset.y);
+  };
+  const abrirNoMaps = () => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      event.address
+    )}`;
+
+    Linking.openURL(url).catch((err) =>
+      console.error("Erro ao abrir o Maps:", err)
+    );
+  };
+
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 bg-gray-50">
+      {scrollY >= 190 ? (
+        <View className="absolute top-8 left-0 right-0 w-full flex-row  p-2 justify-between z-10">
+          <TouchableOpacity
+            className="rounded-full items-center justify-center w-10 h-10 bg-black/20 left-0 top-0 p-2"
+            onPress={() => navigation.goBack()}
+          >
+            <ArrowLeft color="white" size={24} />
+          </TouchableOpacity>
+          <TouchableOpacity className=" items-center rounded-full justify-center w-10 h-10 bg-black/20 right-0 top-0 p-2">
+            <Share2 color="white" size={20} />
+          </TouchableOpacity>
+        </View>
+      ) : null}
+      <ScrollView onScroll={handleScroll} showsVerticalScrollIndicator={false}>
         <View>
           {loading ? <Text>Loading...</Text> : null}
 
-          <View className="w-full h-auto ">
+          <View className="w-full h-auto relative">
+            <View className="absolute top-4 left-0 w-full flex-row  p-2 justify-between z-10">
+              <TouchableOpacity
+                className="rounded-full items-center justify-center w-10 h-10 bg-black/30 left-0 top-0 p-2"
+                onPress={() => navigation.goBack()}
+              >
+                <ArrowLeft color="white" size={24} />
+              </TouchableOpacity>
+              <TouchableOpacity className=" items-center rounded-full justify-center w-10 h-10 bg-black/30 right-0 top-0 p-2">
+                <Share2 color="white" size={20} />
+              </TouchableOpacity>
+            </View>
             <Image
               style={{ width: width, height: 220 }}
               className="object-cover"
               source={event?.image}
             />
           </View>
-          <View className="bg-white rounded-[2rem] p-4 w-full relative bottom-7 shadow-xl">
+          <View className="bg-gray-50 rounded-[1.5rem] p-4 w-full relative bottom-7 shadow-xl">
             <View>
-              <Text className="text-gray-900 font-bold text-xl">
+              <Text className="text-gray-900 font-bold text-[1.40rem]">
                 {event?.title}
               </Text>
             </View>
-            <View className="py-2 pb-4">
+            <View className="py-2  pb-4">
               <Text className="text-gray-500 font-normal">
                 {event?.description}
               </Text>
             </View>
-            <View className="py-2 flex-row items-center ">
-              <View className="px-3  rounded-full">
-                <CalendarDays color="#6366F1" size={20} />
-              </View>
-              <View className="gap-1 ">
-                <View className="">
-                  <Text className="text-gray-400 font-semibold">Data</Text>
+            <View className="gap-3">
+              <View className="p-2 rounded-2xl bg-white flex-row items-center ">
+                <View className="pr-2  rounded-full">
+                  <CalendarDays color="#6366F1" size={23} />
                 </View>
-                <View className="">
-                  <Text className="text-gray-700 font-semibold">{date}</Text>
-                </View>
-                <View className="">
-                  <Text className="text-gray-400 font-semibold">
-                    {event?.time}
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View className=" py-2 flex-row items-center ">
-              <View className="px-3 ">
-                <MapPin color="#6366F1" size={20} />
-              </View>
-              <View className="gap-1 ">
-                <View className="">
-                  <Text className="text-gray-400 font-semibold">Local</Text>
-                </View>
-                <View className="">
-                  <Text className="text-gray-700 font-semibold">
-                    {event?.venue}
-                  </Text>
-                </View>
-                <View className="flex-row  items-center ">
-                  <View style={{width: width/1.3}} className="  ">
+                <View className="gap-1 ">
+                  <View className="">
+                    <Text className="text-gray-400 font-semibold">Data</Text>
+                  </View>
+                  <View className="">
+                    <Text className="text-gray-700 font-semibold">{date}</Text>
+                  </View>
+                  <View className="">
                     <Text className="text-gray-400 font-semibold">
-                    {event?.address}
-                  </Text>
+                      {event?.time}
+                    </Text>
                   </View>
-                  
                 </View>
               </View>
-              <View>
-                    <ChevronRight color={'black'} size={20} />
-                  </View>
-            </View>
-            <View className=" py-2 flex-row items-center ">
-              <View className="px-3  rounded-full">
-                <Building2 color="#6366F1" size={20} />
-              </View>
-              <View className="gap-1 ">
-                <View className="">
-                  <Text className="text-gray-400 font-semibold">
-                    Organizador
-                  </Text>
+              <TouchableOpacity
+                onPress={abrirNoMaps}
+                className=" p-2  bg-white rounded-2xl elevation-sm flex-row items-center "
+              >
+                <View className="pr-2 ">
+                  <MapPin color="#6366F1" size={23} />
                 </View>
-                <View className="">
-                  <Text className="text-gray-700 font-semibold">
-                    {event?.organizer}
-                  </Text>
+                <View className="gap-1 ">
+                  <View className="">
+                    <Text className="text-gray-400 font-semibold">Local</Text>
+                  </View>
+                  <View className="">
+                    <Text className="text-gray-700 text-lg font-semibold">
+                      {event?.venue}
+                    </Text>
+                  </View>
+                  <View className="flex-row  items-center ">
+                    <View style={{ width: width / 1.3 }} className="  ">
+                      <Text className="text-gray-400 font-semibold">
+                        {event?.address}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View>
+                  <ChevronRight color={"#9ca3af"} size={23} />
+                </View>
+              </TouchableOpacity>
+              <View className=" p-2 rounded-2xl bg-white flex-row items-center ">
+                <View className="pr-2  rounded-full">
+                  <Building2 color="#6366F1" size={23} />
+                </View>
+                <View className="gap-1 ">
+                  <View className="">
+                    <Text className="text-gray-400 font-semibold">
+                      Organizador
+                    </Text>
+                  </View>
+                  <View className="">
+                    <Text className="text-gray-700 font-semibold">
+                      {event?.organizer}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -164,219 +293,75 @@ export default function TicketDetails() {
                   Escolha seu Ingressos
                 </Text>
               </View>
-              <View>
-                <TouchableOpacity className="bg-gray-50 rounded-2xl p-4 mt-2 ">
-                  <View>
-                    <Text className="text-gray-700 font-semibold text-xl">
-                      Ingresso Pista
-                    </Text>
-                  </View>
-                  <View>
-                    <Text className="text-indigo-500 font-extrabold text-2xl">
-                      {event?.price.currency} {event?.price.min},00
-                    </Text>
-                  </View>
-                  <View>
-                    <View>
-                      <Text className="text-gray-500">
-                        Entrada geral com acesso completo ao evento
-                      </Text>
-                    </View>
-                    <View className="py-2 gap-1">
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Acesso ao evento
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Arena pista
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          banheiros
-                        </Text>
-                      </View>
-                    </View>
-                     <View className="mt-6" >
-                        <View style={styles.progressBar}>
-                          <View
-                            style={[
-                              styles.progressFill,
-                              {
-                                width: `${availability}%`,
-                                backgroundColor:'#34D399',
-                              },
-                            ]}
-                          />
-                        </View>
-                        <Text
-                          className="text-gray-500 text-sm font-semibold text-center"
-                        >
-                          {event.availableTickets} de {event.totalTickets} disponíveis
-                        </Text>
-                      </View>
-                  </View>
-                </TouchableOpacity>
+
+              <TicketPay handleTotal={handleTotal} />
+            </View>
+          </View>
+          <View>
+            {selectedTicket ? (
+              <View className="w-full mb-32 h-24       ">
+              <View className="px-4">
+                <Text className="text-gray-600 font-bold text-xl ">
+                  Quantidade
+                </Text>
               </View>
-              <View>
-                <TouchableOpacity className="bg-gray-50 rounded-2xl p-4 mt-2 ">
-                  <View>
-                    <Text className="text-gray-700 font-semibold text-xl">
-                      Ingresso Vip
-                    </Text>
-                  </View>
-                  <View>
-                    <Text className="text-indigo-500 font-extrabold text-2xl">
-                      {event?.price.currency} {event?.price.max},00
-                    </Text>
-                  </View>
-                  <View>
-                    <View>
-                      <Text className="text-gray-500">
-                        Experiencia vip com beneficios exclusivo
-                      </Text>
-                    </View>
-                    <View className="py-2 gap-1">
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Acesso ao evento
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Arena Vip
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Bar exclusivo
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Estacionamento gratis
-                        </Text>
-                      </View>
-                    </View>
-                     <View className="mt-6" >
-                        <View style={styles.progressBar}>
-                          <View
-                            style={[
-                              styles.progressFill,
-                              {
-                                width: `${availability}%`,
-                                backgroundColor:'#FBBF24',
-                              },
-                            ]}
-                          />
-                        </View>
-                        <Text
-                          className="text-gray-500 text-sm font-semibold text-center"
-                        >
-                          {event.availableTickets} de {event.totalTickets} disponíveis
-                        </Text>
-                      </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View>
-                <TouchableOpacity className="bg-gray-50 rounded-2xl p-4 mt-2 ">
-                  <View>
-                    <Text className="text-gray-700 font-semibold text-xl">
-                      Ingresso Premium
-                    </Text>
-                  </View>
-                  <View>
-                    <Text className="text-indigo-500 font-extrabold text-2xl">
-                      {event?.price.currency} {event?.price.premium},00
-                    </Text>
-                  </View>
-                  <View>
-                    <View>
-                      <Text className="text-gray-500">
-                        Experiencia premium com beneficios exclusivo
-                      </Text>
-                    </View>
-                    <View className="py-2 gap-1">
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Acesso ao evento
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Arena premium
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Open Bar & Open food
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Lembranças exclusivas
-                        </Text>
-                      </View>
-                      <View className="flex-row gap-2 items-center">
-                        <Check color={"green"} size={16} />
-                        <Text className="font-semibold text-gray-600">
-                          Estacionamento gratis
-                        </Text>
-                      </View>
-                      <View className="mt-6" >
-                        <View style={styles.progressBar}>
-                          <View
-                            style={[
-                              styles.progressFill,
-                              {
-                                width: `${availability}%`,
-                                backgroundColor:'#A78BFA',
-                              },
-                            ]}
-                          />
-                        </View>
-                        <Text
-                          className="text-gray-500 text-sm font-semibold text-center"
-                        >
-                          {event.availableTickets} de {event.totalTickets} disponíveis
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
+              <View className="flex-row gap-10 bg-white justify-center items-center p-2">
+                    <TouchableOpacity className="bg-gray-50 p-2 rounded-full"   onPress={() =>setQuantity(Math.max(1, quantity - 1)) }><Minus color={'#6366f1'} size={25}/></TouchableOpacity>
+                <Text className="text-gray-700 font-bold text-2xl">
+                  {quantity}
+                </Text>
+              <TouchableOpacity className="bg-gray-50 p-2 rounded-full"   onPress={() => setQuantity(Math.min(10, quantity + 1))}><Plus color={'#6366f1'} size={25}/></TouchableOpacity>
               </View>
             </View>
-
-          
+            ) : null}
           </View>
+          
         </View>
       </ScrollView>
+     { selectedTicket ? ( <View className="w-full h- absolute bottom-0 left-0 right-0 pb-5 bg-white elevation-md px-4 pt-3  flex-row justify-between items-center">
+        
+            <View>
+              <View>
+                <Text className=" text-base text-gray-500">Total</Text>
+              </View>
+              <View>
+                <Text className="font-bold text-[1.40rem]">{selected?.currency} {total},00</Text>
+              </View>
+              <View>
+                <Text className=" text-base text-gray-500">{quantity}x {selected?.name}</Text>
+              </View>
+            </View>
+           <View>
+             <View   className=" overflow-hidden w-44 h-14 rounded-3xl"> 
+          
+               <LinearGradient
+                            colors={["#6366F1", "#8B5CF6"]}
+                            className=" items-center justify-center gap-2 flex-row "
+                            style={{ flex: 1 }}
+                          >
+           
+                <View>
+                  <ShoppingCart color="#fff" size={23} />
+                </View>
+                <View>
+                  <Text className="text-white font-bold">Comprar Agora</Text>
+                </View>
+              </LinearGradient>
+            </View>
+           </View>
+          </View>) : null}
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
-      progressBar: {
+  progressBar: {
     height: 4,
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: "rgba(0,0,0,0.1)",
     borderRadius: 2,
     marginBottom: 6,
   },
   progressFill: {
-    height: '100%',
+    height: "100%",
     borderRadius: 2,
   },
-})
+});

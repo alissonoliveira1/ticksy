@@ -1,17 +1,16 @@
 
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
-import TabsUi from '@/components/ui/myTabBar';
 import { Tabs } from 'expo-router';
 import { House, Ticket, Users } from 'lucide-react-native';
 import '../../global.css';
 export default function TabLayout() {
   return (
     <Tabs
-       tabBar={(props) => <TabsUi {...props} />}
+       
        screenOptions={{
         headerShown: false,
         lazy: true,
-         tabBarActiveTintColor: '#ffffffff',
+         tabBarActiveTintColor: '#615FFF',
       
       }}
     >

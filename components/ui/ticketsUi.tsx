@@ -1,5 +1,7 @@
+import { categories } from "@/schemas/EventSchemas";
 import { Event } from "@/schemas/TicketSchamas";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { Music } from "lucide-react-native";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { SkeletonTicketUi } from "./SkeletonTicketUi";
@@ -36,6 +38,21 @@ export const TicketsUi = ({loading,activeErros, eventTitle, event, onPress, vari
     return { text: 'Dernières places', color: '#F44336' };
   };
   const availability = getAvailabilityStatus();
+ const formattedDate = (dateString: string) => {
+   const date = new Date(item.date);
+const day = date.toLocaleDateString('pt-BR', {
+  day: '2-digit',
+}).toUpperCase().replace('.', '');
+const month = date.toLocaleDateString('pt-BR', {
+  month: 'short',
+}).toUpperCase().replace('.', '');
+return { day, month };
+ }
+
+  const dateInfo = formattedDate(item.date);
+  const categoryColors = getCategoryColor(item.category);
+  
+ const IconsCategory = categories.find(cat => cat.key === item.category)?.Icon || '';
 
     return(
    <TouchableOpacity onPress={() => onPress(item)}  className=" w-52 h-auto elevation-sm rounded-[1rem] shadow-xl shadow-black  m-3 ">
@@ -48,22 +65,28 @@ export const TicketsUi = ({loading,activeErros, eventTitle, event, onPress, vari
             contentFit="cover"
           />
         </View>
-        <View className="absolute top-2 right-2 w-10 h-10 justify-center items-center bg-green-500/50 rounded-md p-1 ">
-          <Text className="text-white text-center font-bold text-lg">12</Text>
-          <Text className="text-xs text-center text-white font-bold -mt-1">
-            JUN
-          </Text>
-        </View>
-      </View>
+       <View className="absolute top-2 right-2 w-10 h-10 justify-center items-center p-1 overflow-hidden rounded-md">
+  <LinearGradient
+    colors={categoryColors as [string, string]}
+    className=" w-10 h-10 justify-center items-center"
+    style={{ borderRadius: 8 }} 
+  >
+    <Text className="text-white text-center font-bold text-lg">{dateInfo.day}</Text>
+    <Text className="text-xs text-center text-white font-bold -mt-1">
+      {dateInfo.month}
+    </Text>
+  </LinearGradient>
+</View>
+</View>
       <View className="bg-white rounded-b-[1rem] p-2">
         <View>
           <View className="flex-row items-center justify-between">
             <View className="bg-indigo-500 w-4 h-4 justify-center items-center rounded-full p-1">
            
-                <Music color={"white"} size={8} />
+              {IconsCategory ? <IconsCategory color="white" size={10} /> : <Music color="white" size={10} />}
              
             </View>
-            <View style={{backgroundColor:availability.color}} className="w-4 h-4 rounded-full "></View>
+            <View style={{backgroundColor:availability.color}} className="w-2 h-2 rounded-full "></View>
           </View>
         </View>
         <View className="pb-1">
