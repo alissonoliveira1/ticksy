@@ -11,7 +11,7 @@ export default function TabLayout() {
         headerShown: false,
         lazy: true,
          tabBarActiveTintColor: '#615FFF',
-      
+     
       }}
     >
       <Tabs.Screen name="index"   

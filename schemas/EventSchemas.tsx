@@ -56,6 +56,7 @@ export interface Category {
 export const categories: Category[] = [
   { key: "all", label: "Todos", Icon: LayoutGrid },
   { key: "music", label: "Música", Icon: Music },
+  { key: "university", label: "Universitário", Icon: GraduationCap },
   { key: "sport", label: "Esporte", Icon: Volleyball },
   { key: "theater", label: "Teatro", Icon: Drama },
   { key: "conference", label: "Conferência", Icon: Briefcase },
@@ -70,7 +71,7 @@ export const categories: Category[] = [
   { key: "tech", label: "Tecnologia & Startups", Icon: Cpu },
   { key: "wellness", label: "Bem-estar", Icon: Heart },
   { key: "charity", label: "Caridade", Icon: Gift },
-  { key: "university", label: "Universitário", Icon: GraduationCap },
+  
 ];
 
 export const CategoryConnectSchema = z.enum([

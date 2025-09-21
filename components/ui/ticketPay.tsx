@@ -1,6 +1,6 @@
 import { Check } from "lucide-react-native";
 import React from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 interface TicketType {
   id: string;
@@ -67,11 +67,14 @@ export const TicketPay = ({handleTotal}: { handleTotal: (ticket:string) => void 
     console.log("clicou")
 
   };
-  const RenderIngress = ({ event }: { event: TicketType }) => {
-    const availability = (event?.available / event?.total) * 100;
+
+ 
     return (
       <View>
-        <TouchableOpacity
+       {mockTicketTypes.map((event) => (
+         <TouchableOpacity
+          key={event.id}
+        activeOpacity={0.9}
           onPress={() => select(event.id)}
           style={[
             selectedTicket === event.id
@@ -156,7 +159,7 @@ export const TicketPay = ({handleTotal}: { handleTotal: (ticket:string) => void 
                   style={[
                     { height: "100%", borderRadius: 2 },
                     {
-                      width: `${availability}%`,
+                      width: `${event?.available / event?.total * 100}%`,
                     },
                     selectedTicket === event.id
                       ? { backgroundColor: "#f9fafb" }
@@ -177,16 +180,9 @@ export const TicketPay = ({handleTotal}: { handleTotal: (ticket:string) => void 
             </View>
           </View>
         </TouchableOpacity>
+       ))}
       </View>
     );
-  };
-  return (
-    <FlatList
-      data={mockTicketTypes}
-      scrollEnabled={false}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <RenderIngress event={item} />}
-      showsVerticalScrollIndicator={false}
-    />
-  );
+  
+  
 };

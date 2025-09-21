@@ -10,6 +10,7 @@ import { EventService } from "@/services/eventServices";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useNavigation } from "expo-router";
+import LottieView from 'lottie-react-native';
 import {
   ArrowLeft,
   Building2,
@@ -47,10 +48,8 @@ export default function TicketDetails() {
   const navigation = useNavigation();
   const [scrollY, setScrolly] = useState(0);
   const width = Dimensions.get("window").width;
-  const height = Dimensions.get("window").height;
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
-  const [valorTotal, setValorTotal] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const { id } = useLocalSearchParams<{ id: string }>();
   const [selectedTicket, setSelectedTicket] = useState('');
@@ -138,11 +137,6 @@ export default function TicketDetails() {
     const total = selected ? selected.price * quantity : 0
   
 
-
-
-
-
- 
   const handleScroll = (event: any) => {
     setScrolly(event.nativeEvent.contentOffset.y);
   };
@@ -171,10 +165,22 @@ export default function TicketDetails() {
           </TouchableOpacity>
         </View>
       ) : null}
-      <ScrollView onScroll={handleScroll} showsVerticalScrollIndicator={false}>
+     
         <View>
-          {loading ? <Text>Loading...</Text> : null}
+          {loading ? 
+          <View className="w-full h-screen justify-center items-center bg-gray-50">
 
+      <LottieView
+      source={{ uri: 'https://lottie.host/288cdfa5-336c-4a91-a7c8-cfda9b52c479/OuYPKwJJnW.lottie' }}
+      autoPlay
+      loop
+      speed={1.5} 
+      style={{ width: 250, height: 250 }}
+    />
+
+
+          </View> : (
+ <ScrollView onScroll={handleScroll} showsVerticalScrollIndicator={false}>
           <View className="w-full h-auto relative">
             <View className="absolute top-4 left-0 w-full flex-row  p-2 justify-between z-10">
               <TouchableOpacity
@@ -306,18 +312,18 @@ export default function TicketDetails() {
                 </Text>
               </View>
               <View className="flex-row gap-10 bg-white justify-center items-center p-2">
-                    <TouchableOpacity className="bg-gray-50 p-2 rounded-full"   onPress={() =>setQuantity(Math.max(1, quantity - 1)) }><Minus color={'#6366f1'} size={25}/></TouchableOpacity>
-                <Text className="text-gray-700 font-bold text-2xl">
+                    <TouchableOpacity activeOpacity={1} className="bg-gray-50 p-2 rounded-full elevation-sm"   onPress={() =>setQuantity(Math.max(1, quantity - 1)) }><Minus color={'#6366f1'} size={25}/></TouchableOpacity>
+                <Text className="text-gray-700 font-bold text-center w-10 text-2xl">
                   {quantity}
                 </Text>
-              <TouchableOpacity className="bg-gray-50 p-2 rounded-full"   onPress={() => setQuantity(Math.min(10, quantity + 1))}><Plus color={'#6366f1'} size={25}/></TouchableOpacity>
+              <TouchableOpacity className="bg-gray-50 p-2 rounded-full elevation-sm"  activeOpacity={1}  onPress={() => setQuantity(Math.min(10, quantity + 1))}><Plus color={'#6366f1'} size={25}/></TouchableOpacity>
               </View>
             </View>
             ) : null}
           </View>
-          
+           </ScrollView>)}
         </View>
-      </ScrollView>
+     
      { selectedTicket ? ( <View className="w-full h- absolute bottom-0 left-0 right-0 pb-5 bg-white elevation-md px-4 pt-3  flex-row justify-between items-center">
         
             <View>

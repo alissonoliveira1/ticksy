@@ -1,5 +1,6 @@
 import { AlertUi } from "@/components/ui/alertUi";
 import { Category } from "@/components/ui/category";
+import { ModalLocal } from "@/components/ui/dialog";
 import { TicketPrincipal } from "@/components/ui/ticketPrincipal";
 import { TicketsUi } from "@/components/ui/ticketsUi";
 import { Event } from "@/schemas/TicketSchamas";
@@ -7,9 +8,9 @@ import { EventService } from "@/services/eventServices";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { SearchIcon } from "lucide-react-native";
+import { ChevronDown, MapPin, SearchIcon } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import { ScrollView, Text, TextInput, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -18,7 +19,10 @@ export default function Index() {
   const [category, setCategory] = useState("all");
   const [erros, setErros] = useState("");
   const [activeErros, setActiveErros] = useState(false);
+  const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [gridOrList, setGridOrList] = useState(true);
   const handleEventPress = (event: Event) => {
     console.log("Evento pressionado:", event);
     router.push({pathname: "/TicketDetails", params: { id: event.id }});
@@ -62,33 +66,39 @@ export default function Index() {
     <SafeAreaView
       style={{
         flex: 1,
+        backgroundColor: "#f9fafb",
       }}
     >
       {activeErros ? <AlertUi erros={erros} /> : null}
       <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        className="flex-1 bg-white pb-40"
+        className="flex-1 #f9fafb pb-40"
       >
         <View className="w-full">
           <View className=" flex-row rounded-b-[3rem] overflow-hidden">
             <LinearGradient
               colors={["#6366F1", "#8B5CF6"]}
-              className=" p-5 flex-col items-center rounded-b-[3rem] "
+              className=" p-5  items-center justify-between flex-row rounded-b-[3rem] "
               style={{ flex: 1 }}
             >
-              <View className="items-center justify-center flex-1 mb-4">
-                <Text className="text-white font-bold text-3xl">Ticksy</Text>
+              <View>
+                <TouchableOpacity activeOpacity={1}  className="flex-row gap-2 bg-black/20 mt-3 px-4 py-2 rounded-full border border-gray-200" onPress={() => setActive(true)}>
+                  <MapPin color={'#f9fafb'} size={20}/>{selectedLocation ? <Text className="text-white">{selectedLocation}</Text> : <Text className="text-white">Onde você está?</Text>} 
+                  <ChevronDown color={'#f9fafb'} size={20}/>
+                </TouchableOpacity>
+                <View>
+
+                </View>
               </View>
-              <View className=" bg-black/20  flex-row flex-1 items-center rounded-2xl border h-auto px-3 overflow-hidden border-gray-200">
+
+              <TouchableOpacity onPress={() => router.push('/search')} className=" bg-black/20  flex-row  items-center rounded-full border h-auto mt-3 px-4 py-2 overflow-hidden border-gray-200">
                 <SearchIcon size={20} color={"#ffffff"} />
-                <TextInput
-                  placeholderTextColor={"#F3F4F6"}
-                  placeholder="Buscar experiências"
-                  className=" h-11 flex-1 text-white rounded-lg text-base leading-10 placeholder-gray-200::placeholder
-                "
-                />
-              </View>
+                <View className="pl-2 ">
+                  <Text className="text-white">Buscar eventos</Text>
+                </View>
+              </TouchableOpacity>
+              
             </LinearGradient>
           </View>
         </View>
@@ -104,6 +114,7 @@ export default function Index() {
             event={featuredEvents}
             onPress={handleEventPress}
             variant="horizontal"
+            GridOrList={true}
           />
         </View>
         <View>
@@ -114,9 +125,11 @@ export default function Index() {
             event={otherEvents}
             onPress={handleEventPress}
             variant="horizontal"
+            GridOrList={true}
           />
         </View>
       </ScrollView>
+      <ModalLocal active={active} setActive={setActive} setSelectedLocation={setSelectedLocation} />
     </SafeAreaView>
   );
 }

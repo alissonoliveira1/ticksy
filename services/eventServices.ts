@@ -1,6 +1,6 @@
 
 import { EventCategory } from "@/schemas/EventSchemas";
-import { Event } from "@/schemas/TicketSchamas";
+import { Event, LocalEstadosType } from "@/schemas/TicketSchamas";
 const mockEvents: Event[] = [
   {
     id: '1',
@@ -92,3 +92,36 @@ export class EventService {
     return mockEvents.filter(event => event.category === category);
   }
 }
+
+
+
+
+export const capitaisBrasil: LocalEstadosType[]  =[
+  { estado: "Acre", sigla: "AC", capital: "Rio Branco" },
+  { estado: "Alagoas", sigla: "AL", capital: "Maceió" },
+  { estado: "Amapá", sigla: "AP", capital: "Macapá" },
+  { estado: "Amazonas", sigla: "AM", capital: "Manaus" },
+  { estado: "Bahia", sigla: "BA", capital: "Salvador" },
+  { estado: "Ceará", sigla: "CE", capital: "Fortaleza" },
+  { estado: "Distrito Federal", sigla: "DF", capital: "Brasília" },
+  { estado: "Espírito Santo", sigla: "ES", capital: "Vitória" },
+  { estado: "Goiás", sigla: "GO", capital: "Goiânia" },
+  { estado: "Maranhão", sigla: "MA", capital: "São Luís" },
+  { estado: "Mato Grosso", sigla: "MT", capital: "Cuiabá" },
+  { estado: "Mato Grosso do Sul", sigla: "MS", capital: "Campo Grande" },
+  { estado: "Minas Gerais", sigla: "MG", capital: "Belo Horizonte" },
+  { estado: "Pará", sigla: "PA", capital: "Belém" },
+  { estado: "Paraíba", sigla: "PB", capital: "João Pessoa" },
+  { estado: "Paraná", sigla: "PR", capital: "Curitiba" },
+  { estado: "Pernambuco", sigla: "PE", capital: "Recife" },
+  { estado: "Piauí", sigla: "PI", capital: "Teresina" },
+  { estado: "Rio de Janeiro", sigla: "RJ", capital: "Rio de Janeiro" },
+  { estado: "Rio Grande do Norte", sigla: "RN", capital: "Natal" },
+  { estado: "Rio Grande do Sul", sigla: "RS", capital: "Porto Alegre" },
+  { estado: "Rondônia", sigla: "RO", capital: "Porto Velho" },
+  { estado: "Roraima", sigla: "RR", capital: "Boa Vista" },
+  { estado: "Santa Catarina", sigla: "SC", capital: "Florianópolis" },
+  { estado: "São Paulo", sigla: "SP", capital: "São Paulo" },
+  { estado: "Sergipe", sigla: "SE", capital: "Aracaju" },
+  { estado: "Tocantins", sigla: "TO", capital: "Palmas" },
+];

@@ -2,7 +2,12 @@
 import * as z from "zod";
 import { EventCategorySchema } from "./EventSchemas";
 
-
+export const localEstados = z.object({
+  estado: z.string(),
+  capital: z.string(),
+  sigla: z.string(),
+})
+export type LocalEstadosType = z.infer<typeof localEstados>
 
 export const EventSchema = z.object({
   id: z.string(),
