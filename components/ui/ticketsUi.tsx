@@ -158,12 +158,14 @@ const styleGridorList = {
     );
   };
   return (
-    <View className={colluns === 1 ?"pt-3" : " w-full h-auto justify-center items-center "}>
-      <View className="w-full px-4 ">
+    <View className={colluns === 1 ?"pt-3" : " w-full h-auto justify-center pt-0 items-center "}>
+      {GridOrList ? (
+        <View className="w-full px-4 ">
         <Text className="text-black text-start font-semibold text-lg">
           {eventTitle}
         </Text>
       </View>
+      ): null}
 
       {event.length === 0 ? <SkeletonTicketUi /> : null}
       {loading && !activeErros && <SkeletonTicketUi />}
@@ -174,6 +176,7 @@ const styleGridorList = {
           scrollEnabled={variant === "horizontal" ? true : false}
           data={event}
           numColumns={ colluns}
+          centerContent
           keyExtractor={(item) => item.id}
           horizontal={isHorizontal}
           showsHorizontalScrollIndicator={false}
