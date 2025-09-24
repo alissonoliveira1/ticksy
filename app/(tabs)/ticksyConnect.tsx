@@ -2,6 +2,7 @@ import { Event } from "@/schemas/TicketSchamas";
 import { EventService } from "@/services/eventServices";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { CalendarDays, Heart, MapPin, UsersRound } from "lucide-react-native";
 import { useEffect, useState } from "react";
@@ -32,7 +33,7 @@ useEffect(() => {
 
   const renderItem = ({ item }: { item: Event }) => (
     <View className="p-2">
-      <TouchableOpacity className="w-full relative rounded-[2rem] border border-gray-200 overflow-hidden h-52 
+      <TouchableOpacity onPress={() => router.push({pathname:'/pageMatch', params:{id:item.id}})} className="w-full relative rounded-[2rem] border border-gray-200 overflow-hidden h-52 
       elevation-10 shadow-lg">
        <Image style={{width:"100%", height:"100%"}} contentFit="cover" source={item.image} />
     
