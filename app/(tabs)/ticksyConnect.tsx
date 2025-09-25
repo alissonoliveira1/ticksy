@@ -102,7 +102,7 @@ useEffect(() => {
 
   return (
     <SafeAreaView>
-      <StatusBar style="light" backgroundColor="#615FFF" translucent={false} />
+      <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <View className="w-full ">
         <View className=" flex-row bg-transparent rounded-b-[3rem] overflow-hidden">
           <LinearGradient

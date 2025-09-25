@@ -182,7 +182,7 @@ export default function Profile() {
               />
               <MenuItem
                 icon={<Shield size={23} color={"#6366F1"} />}
-                title="Pulitica de privacidade"
+                title="Politica de privacidade"
                 subtitle="Dados e segurança"
                 onPress={() => handleMenuPress("profile")}
               />
