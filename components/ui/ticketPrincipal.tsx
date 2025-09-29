@@ -37,15 +37,15 @@ const handlePress = () => {
   
 }
   return (
-    <View className="w-full h-auto items-center bg-white justify-center mt-4 pt-2 pb-36">
-      {loading && <SkeletonPrincipal />}
+    <View className="w-full h-auto items-center bg-white justify-center mt-8 pt-2 pb-4 ">
+      {loading  && <SkeletonPrincipal />}
       {event.length > 0 && (
         
         <View
           style={{
             width: viewWidth,
-            height: viewHeight,
           }}
+          
         >
           <Carousel
             loop
@@ -53,6 +53,7 @@ const handlePress = () => {
             autoPlayInterval={3000}
             width={width}
             height={220}
+            
             data={event ?? []}
             mode="horizontal-stack"
             modeConfig={{
@@ -105,7 +106,7 @@ const handlePress = () => {
                 <TouchableOpacity className="w-full" onPress={handlePress}>
                   <View className="w-full items-center  px-2">
                   <View className="flex w-full justify-center flex-row  mb-5">
-                    <Text className="text-gray-700 text-xl font-bold">
+                    <Text className="text-gray-700 text-2xl font-bold">
                   {event[activeIndex].title.toLocaleUpperCase()}
                 </Text>
                   </View>

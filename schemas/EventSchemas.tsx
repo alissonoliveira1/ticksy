@@ -6,7 +6,8 @@ import {
   Cpu,
   Drama,
   Film,
-  Gift, GraduationCap,
+  Gift,
+  GraduationCap,
   Heart,
   LayoutGrid,
   Mail,
@@ -18,7 +19,7 @@ import {
   Ticket,
   Users,
   UsersRound,
-  Volleyball
+  Volleyball,
 } from "lucide-react-native";
 import { FC } from "react";
 import { z } from "zod";
@@ -36,7 +37,7 @@ export const EventCategorySchema = z.enum([
   "cinema",
   "party",
   "family",
-  "education",
+  "lecture",
   "tech",
   "wellness",
   "charity",
@@ -45,18 +46,18 @@ export const EventCategorySchema = z.enum([
 
 export type EventCategory = z.infer<typeof EventCategorySchema>;
 
-
 export interface Category {
   key: EventCategory;
   label: string;
   Icon: FC<any>;
 }
 
-
 export const categories: Category[] = [
   { key: "all", label: "Todos", Icon: LayoutGrid },
-  { key: "music", label: "Música", Icon: Music },
+  { key: "lecture", label: "Palestra", Icon: Book },
   { key: "university", label: "Universitário", Icon: GraduationCap },
+  { key: "party", label: "Festa", Icon: PartyPopper },
+  { key: "music", label: "Música", Icon: Music },
   { key: "sport", label: "Esporte", Icon: Volleyball },
   { key: "theater", label: "Teatro", Icon: Drama },
   { key: "conference", label: "Conferência", Icon: Briefcase },
@@ -65,13 +66,10 @@ export const categories: Category[] = [
   { key: "art", label: "Arte", Icon: Palette },
   { key: "food", label: "Gastronomia", Icon: Coffee },
   { key: "cinema", label: "Cinema", Icon: Film },
-  { key: "party", label: "Festa", Icon: PartyPopper },
   { key: "family", label: "Família & Crianças", Icon: Users },
-  { key: "education", label: "Educação", Icon: Book },
   { key: "tech", label: "Tecnologia & Startups", Icon: Cpu },
   { key: "wellness", label: "Bem-estar", Icon: Heart },
   { key: "charity", label: "Caridade", Icon: Gift },
-  
 ];
 
 export const CategoryConnectSchema = z.enum([
@@ -89,8 +87,8 @@ export interface CategoryConnect {
   Icon: FC<any>;
 }
 export const ConnectArrey: CategoryConnect[] = [
-  { key: "Sugestões", label: "Sugestões", Icon:   UsersRound  },
+  { key: "Sugestões", label: "Sugestões", Icon: UsersRound },
   { key: "Meus Contatos", label: "Meus Contatos", Icon: ContactRound },
   { key: "Convites", label: "Convites", Icon: Mail },
-  { key: "Comunidades", label: "Comunidades", Icon: Network  },
-]
+  { key: "Comunidades", label: "Comunidades", Icon: Network },
+];

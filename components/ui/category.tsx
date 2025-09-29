@@ -12,8 +12,32 @@ const clickCategory = (key: any) => {
   setSelectedCategory(key);
   setCategory(key);
 }
+
+  const getCategoryColor = (category: string) => {
+  const colors: { [key: string]: string[] } = {
+  music: ["#FF6B6B", "#FF8E53"],       
+  sport: ["#4ECDC4", "#44A08D"],      
+  theater: ["#A8E6CF", "#7FCDCD"],     
+  conference: ["#FFD93D", "#6BCF7F"],  
+  festival: ["#FF8A80", "#FF5722"],    
+  comedy: ["#CE93D8", "#BA68C8"],     
+  art: ["#FFAB91", "#FF8A65"],        
+  food: ["#A5D6A7", "#66BB6A"],       
+
+  cinema: ["#5C6BC0", "#3949AB"],      
+  party: ["#F50057", "#FF4081"],      
+  family: ["#81D4FA", "#29B6F6"],      
+  lecture: ["#FFEB3B", "#FFC107"],  
+  tech: ["#00C9FF", "#92FE9D"],        
+  wellness: ["#81C784", "#388E3C"],    
+  charity: ["#FFB74D", "#F57C00"],   
+  university: ["#673AB7", "#3F51B5"], 
+};
+    return colors[category] || ["#B39DDB", "#9575CD"];
+  };
+
   return (
-    <View className="h-auto gap-4 py-4 px-2">
+    <View className="h-auto gap-4 pb-6 pt-10 px-2">
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -29,15 +53,16 @@ const clickCategory = (key: any) => {
   `}
           >
             <category.Icon
-              size={18}
-              color={category.key === selectedCategory ? "#ffffff" : "#4A5565"}
+              size={17}
+              color={category.key === selectedCategory ? "#ffffff" : getCategoryColor(category.key)[1]}
             />
             <Text
               className={`
-            text-lg
-            ${category.key === selectedCategory ? "text-white" : "#4A5565"} 
+            text-sm
+            
             ml-1
           `}
+          style={{ color: category.key === selectedCategory ? "#ffffff" : getCategoryColor(category.key)[1] }}
             >
               {category.label}
             </Text>

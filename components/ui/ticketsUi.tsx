@@ -2,7 +2,7 @@ import { categories } from "@/schemas/EventSchemas";
 import { Event } from "@/schemas/TicketSchamas";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { CalendarDays, MapPin, Music, Star } from "lucide-react-native";
+import { CalendarDays, Clock, MapPin, Music, PlusCircle, Star } from "lucide-react-native";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { SkeletonTicketUi } from "./SkeletonTicketUi";
 interface EventCardProps {
@@ -27,16 +27,25 @@ export const TicketsUi = ({
   const isHorizontal = variant === "horizontal";
  const colluns =  !isHorizontal ? (GridOrList ? 2 : 1) : 1;
   const getCategoryColor = (category: string) => {
-    const colors: { [key: string]: string[] } = {
-      music: ["#FF6B6B", "#FF8E53"],
-      sport: ["#4ECDC4", "#44A08D"],
-      theater: ["#A8E6CF", "#7FCDCD"],
-      conference: ["#FFD93D", "#6BCF7F"],
-      festival: ["#FF8A80", "#FF5722"],
-      comedy: ["#CE93D8", "#BA68C8"],
-      art: ["#FFAB91", "#FF8A65"],
-      food: ["#A5D6A7", "#66BB6A"],
-    };
+  const colors: { [key: string]: string[] } = {
+  music: ["#FF6B6B", "#FF8E53"],       
+  sport: ["#4ECDC4", "#44A08D"],      
+  theater: ["#A8E6CF", "#7FCDCD"],     
+  conference: ["#FFD93D", "#6BCF7F"],  
+  festival: ["#FF8A80", "#FF5722"],    
+  comedy: ["#CE93D8", "#BA68C8"],     
+  art: ["#FFAB91", "#FF8A65"],        
+  food: ["#A5D6A7", "#66BB6A"],       
+
+  cinema: ["#5C6BC0", "#3949AB"],      
+  party: ["#F50057", "#FF4081"],      
+  family: ["#81D4FA", "#29B6F6"],      
+  lecture: ["#FFEB3B", "#FFC107"],  
+  tech: ["#00C9FF", "#92FE9D"],        
+  wellness: ["#81C784", "#388E3C"],    
+  charity: ["#FFB74D", "#F57C00"],   
+  university: ["#673AB7", "#3F51B5"], 
+};
     return colors[category] || ["#B39DDB", "#9575CD"];
   };
 
@@ -72,7 +81,7 @@ export const TicketsUi = ({
     const IconsCategory =
       categories.find((cat) => cat.key === item.category)?.Icon || "";
 const styleGridorList = {
-  grid:" w-52 h-[13.7rem] elevation-sm rounded-[1rem] m-1 ",
+  grid:" w-52 h-[13.7rem] elevation-sm rounded-[1rem] m-1",
   list:'w-full h-32 flex-row mt-3 bg-white border-b border-gray-200 px-2 py-2 ',
   imgGrid:"w-full relative h-[7.3rem] rounded-t-[1rem] overflow-hidden ",
   imgList:"w-1/3 relative h-full backdrop-brightness-50 relative rounded-[1rem] overflow-hidden  ",
@@ -98,16 +107,16 @@ const styleGridorList = {
         style={{ position: "absolute", width: "100%", height: "50%" }}
       /> }
           </View>
-          <View className={`absolute  ${GridOrList ? "top-2 right-2": "top-1 right-1"} w-10 h-10 justify-center items-center p-1 overflow-hidden  rounded-md`}>
+          <View className={`absolute  ${GridOrList ? "top-2  right-2": "top-1 right-1"} w-10 h-10 justify-center items-center p-1 overflow-hidden  rounded-md`}>
            {GridOrList ? ( <LinearGradient
               colors={categoryColors as [string, string]}
               className=" w-10 h-10 justify-center items-center"
               style={{ borderRadius: 8 }}
             >
-              <Text className="text-white text-center font-bold text-lg">
+              <Text className="text-white text-center font-extrabold text-base">
                 {dateInfo.day}
               </Text>
-              <Text className="text-xs text-center text-white font-bold -mt-1">
+              <Text className="text-xs text-center text-gray-50 font-semibold -mt-1">
                 {dateInfo.month}
               </Text>
             </LinearGradient>) : <Star color={"gold"} fill="gold" size={24} />}
@@ -116,7 +125,7 @@ const styleGridorList = {
         <View className={GridOrList ? styleGridorList.infoGrid : styleGridorList.infoList}>
           <View>
             <View className="flex-row items-center justify-between">
-              <View className="bg-indigo-500 w-4 h-4 justify-center items-center rounded-full p-1">
+              <View style={{ backgroundColor: availability.color }}  className=" w-4 h-4 justify-center items-center rounded-full ">
                 {IconsCategory ? (
                   <IconsCategory color="white" size={10} />
                 ) : (
@@ -129,21 +138,30 @@ const styleGridorList = {
               ></View>
             </View>
           </View>
-          <View className="pb-1">
+          <View className="pb-2">
             <Text className=" text-gray-700 line-clamp-2 font-semibold">
               {item.title}
             </Text>
           </View>
-          <View className={GridOrList ? "pb-1 " : "pb-1 flex-row items-center gap-1"}>
-           {GridOrList ? null :  <MapPin color={"#6B7280"} size={14} />  }
-            <Text className="text-sm text-gray-600">{item.venue}</Text>
+          <View className={"pb-2 flex-row items-center gap-1"}>
+            <MapPin color={"#6B7280"} size={12} /> 
+            <Text className="text-xs text-gray-600">{item.venue}</Text>
           </View>
           <View className="flex-row justify-between items-center">
-            {GridOrList ? (<Text className="text-sm text-indigo-500 font-extrabold">
-              {item.price.currency} {item.price.min},00
-            </Text>) : (<View className="flex-row items-center gap-1">
+            {GridOrList ? (
+              <View className="flex-row items-center gap-1">
+                <CalendarDays color={"#6366f1"} size={12} />
+              <Text className="text-xs text-indigo-500 font-semibold">
+              {date.toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })}
+            </Text>
+              </View>
+          ) : (<View className="flex-row items-center gap-1">
               <CalendarDays color={"#6366f1"} size={14} />
-              <Text className="text-sm text-indigo-500 font-extrabold">
+              <Text className="text-xs text-indigo-500 font-semibold">
               {date.toLocaleDateString("pt-BR", {
                 day: "2-digit",
                 month: "short",
@@ -151,19 +169,23 @@ const styleGridorList = {
               })}
             </Text>
             </View>)}
-            <Text className="text-sm">{item.time}</Text>
+            <View className="flex-row items-center gap-1">
+              <Clock color={"#6B7280"} size={12} />
+              <Text className="text-xs">{item.time}</Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
     );
   };
   return (
-    <View className={colluns === 1 ?"pt-3" : " w-full h-auto justify-center pt-0 items-center "}>
+    <View className={colluns === 1 ?"pt-3 mb-8  " : " w-full h-auto justify-center pt-0 items-center "}>
       {GridOrList ? (
-        <View className="w-full px-4 ">
-        <Text className="text-black text-start font-semibold text-lg">
+        <View className="w-full flex-row justify-between px-4 mb-2">
+        <Text className="text-gray-600 text-start font-semibold text-lg">
           {eventTitle}
         </Text>
+        <PlusCircle color={"#6366f1"} size={24} />
       </View>
       ): null}
 
@@ -180,6 +202,7 @@ const styleGridorList = {
           keyExtractor={(item) => item.id}
           horizontal={isHorizontal}
           showsHorizontalScrollIndicator={false}
+          className="pl-2 "
         />
       )}
     </View>

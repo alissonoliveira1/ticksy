@@ -22,11 +22,10 @@ export default function Index() {
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [gridOrList, setGridOrList] = useState(true);
+
   const handleEventPress = (event: Event) => {
     console.log("Evento pressionado:", event);
-    router.push({pathname: "/TicketDetails", params: { id: event.id }});
-
+    router.push({ pathname: "/TicketDetails", params: { id: event.id } });
   };
 
   useEffect(() => {
@@ -83,22 +82,33 @@ export default function Index() {
               style={{ flex: 1 }}
             >
               <View>
-                <TouchableOpacity activeOpacity={1}  className="flex-row gap-2 bg-black/20 mt-3 px-4 py-2 rounded-full border border-gray-200" onPress={() => setActive(true)}>
-                  <MapPin color={'#f9fafb'} size={20}/>{selectedLocation ? <Text className="text-white">{selectedLocation}</Text> : <Text className="text-white">Onde você está?</Text>} 
-                  <ChevronDown color={'#f9fafb'} size={20}/>
+                <TouchableOpacity
+                  activeOpacity={1}
+                  className="flex-row gap-2 bg-black/20 mt-3 px-4 py-2 items-center rounded-full border border-gray-200"
+                  onPress={() => setActive(true)}
+                >
+                  <MapPin color={"#f9fafb"} size={17} />
+                  {selectedLocation ? (
+                    <Text className="text-white">{selectedLocation}</Text>
+                  ) : (
+                    <Text className="text-white font-semibold text-sm">Onde você está?</Text>
+                  )}
+                  <ChevronDown color={"#f9fafb"} size={17} />
                 </TouchableOpacity>
-                <View>
-
-                </View>
+                <View></View>
               </View>
 
-              <TouchableOpacity onPress={() => router.push('/search')} className=" bg-black/20  flex-row  items-center rounded-full border h-auto mt-3 px-4 py-2 overflow-hidden border-gray-200">
-                <SearchIcon size={20} color={"#ffffff"} />
+              <TouchableOpacity
+                onPress={() => router.push("/search")}
+                className=" bg-black/20  flex-row  
+                items-center rounded-full border h-auto 
+                mt-3 px-4 py-2 overflow-hidden border-gray-200"
+              >
+                <SearchIcon size={17} color={"#ffffff"} />
                 <View className="pl-2 ">
-                  <Text className="text-white">Buscar eventos</Text>
+                  <Text className="text-white text-sm">Buscar eventos</Text>
                 </View>
               </TouchableOpacity>
-              
             </LinearGradient>
           </View>
         </View>
@@ -108,7 +118,7 @@ export default function Index() {
         </View>
         <View>
           <TicketsUi
-            eventTitle="Eventos mais comprados nas últimas 24h"
+            eventTitle="Mais comprados nas últimas 24h"
             loading={loading}
             activeErros={activeErros}
             event={featuredEvents}
@@ -119,7 +129,7 @@ export default function Index() {
         </View>
         <View>
           <TicketsUi
-            eventTitle="Eventos mais comprados nas últimas 24h"
+            eventTitle="Mais comprados nas últimas 24h"
             loading={loading}
             activeErros={activeErros}
             event={otherEvents}
@@ -129,7 +139,11 @@ export default function Index() {
           />
         </View>
       </ScrollView>
-      <ModalLocal active={active} setActive={setActive} setSelectedLocation={setSelectedLocation} />
+      <ModalLocal
+        active={active}
+        setActive={setActive}
+        setSelectedLocation={setSelectedLocation}
+      />
     </SafeAreaView>
   );
 }
