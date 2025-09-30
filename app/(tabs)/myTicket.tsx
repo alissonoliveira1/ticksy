@@ -11,6 +11,7 @@ import {
   Receipt,
   SearchIcon,
 } from "lucide-react-native";
+import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const tickets = [
@@ -68,6 +69,8 @@ const tickets = [
   },
 ];
 export default function MyTicket() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const getCategoryColor = (category: string) => {
     const colors: { [key: string]: string[] } = {
       music: ["#FF6B6B", "#FF8E53"],
@@ -126,7 +129,7 @@ export default function MyTicket() {
   return (
     <SafeAreaView className="flex-1  bg-gray-50">
       <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
-      <ScrollView className="" showsVerticalScrollIndicator={false}>
+      <ScrollView className="h-auto" showsVerticalScrollIndicator={false}>
         <View className="w-full">
           <View className=" flex-row rounded-b-[3rem] overflow-hidden">
             <LinearGradient
@@ -145,7 +148,7 @@ export default function MyTicket() {
           </View>
         </View>
 
-        <View>
+        <View className="w-full  bg-white border border-gray-100   pt-4">
           <View className="w-full  mt-4  justify-center items-center">
             <View className="w-10/12  ">
               <Input
@@ -168,10 +171,12 @@ export default function MyTicket() {
             </View>
           </View>
 
-          <View className=" w-full py-2 pl-10 ">
-            <View className="relative w-2/5">
-              <View className="px-4 flex-row items-center gap-2 mt-4 border-b border-gray-200">
-                <View>
+          <View className="px-9">
+            <View className=" w-full py-2 justify-center items-end mt-4">
+            <View className="relative   w-1/2">
+              <TouchableOpacity onPress={() => setMenuOpen(true)} className="  p-2  rounded-2xl ">
+                <View className=" flex-row items-center justify-center  gap-3  border-b border-gray-200">
+                  <View>
                   <Funnel
                     className="text-gray-500"
                     color={"#6b7280"}
@@ -179,25 +184,27 @@ export default function MyTicket() {
                   />
                 </View>
                 <Text className="text-base font-semibold text-gray-500 ">
-                  Filtro de busca
+                  {selectedFilter === 'all' ? 'Filtro de busca' : selectedFilter}
                 </Text>
                 <ChevronDown color={"#6b7280"} size={17} />
-              </View>
-
-              <View className="w-full    absolute h-auto p-1 top-11 z-20 bg-gray-100  elevation-sm rounded-b-lg  justify-center ">
-                <View className="">
-                  <View className="p-3 border-b border-b-gray-50 text-gray-500">
-                    <Text>Validos</Text>
-                  </View>
-                  <View className="p-3 border-b border-b-gray-50 text-gray-500">
-                    <Text>Usados</Text>
-                  </View>
-                  <View className="p-3 border-b border-b-gray-50 text-gray-500">
-                    <Text>Expirados</Text>
-                  </View>
                 </View>
-              </View>
+              </TouchableOpacity>
+       { menuOpen && (<View className="w-full    absolute h-auto p-1 top-11 z-20 bg-gray-100  elevation-sm rounded-b-lg  justify-center ">
+                <View className="">
+                  <TouchableOpacity onPress={() => { setSelectedFilter('Validos'); setMenuOpen(false); }} className="p-3 border-b border-b-gray-50 ">
+                    <Text className="text-gray-500">Validos</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setSelectedFilter('Usados'); setMenuOpen(false); }} className="p-3 border-b border-b-gray-50 text-gray-500">
+                    <Text className="text-gray-500">Usados</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setSelectedFilter('Expirados'); setMenuOpen(false); }} className="p-3 border-b border-b-gray-50 text-gray-500">
+                    <Text className="text-gray-500">Expirados</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>)}
+              
             </View>
+          </View>
           </View>
         </View>
 
