@@ -5,9 +5,11 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import {
   Bell,
+  CalendarPlus,
   ChevronRight,
   CircleQuestionMark,
   CreditCard,
@@ -35,7 +37,7 @@ interface MenuItemProps {
   onPress: () => void;
   showArrow?: boolean;
 }
-export default function Profile() {
+export default function Index() {
   const handleMenuPress = (item: string) => {
     console.log(`Menu sélectionné: ${item}`);
   };
@@ -48,7 +50,7 @@ export default function Profile() {
     showArrow = true,
   }: MenuItemProps) {
     return (
-      <TouchableOpacity className="w-full border-gray-100 border flex-row justify-between items-center h-30  rounded-sm mt-2">
+      <TouchableOpacity onPress={onPress} className="w-full border-gray-100 border flex-row justify-between items-center h-30  rounded-sm mt-2">
         <View className="flex-row items-center justify-center p-3">
           <View className="pr-4 text-indigo-500">{icon}</View>
           <View>
@@ -67,7 +69,7 @@ export default function Profile() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-gray-50">
       <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="relative" style={styles.container}>
@@ -132,8 +134,26 @@ export default function Profile() {
               </View>
             </View>
           </View>
-
+ <View className="w-full items-start h-auto p-5 ">
+            
+            
+            <View>
+              <Text className="text-gray-500 text-center font-semibold text-xl">
+                Organizador
+              </Text>
+            </View>
+            <View className="w-full">
+              <MenuItem
+                icon={<CalendarPlus size={23} color={"#6366F1"} />}
+                title="Criar evento"
+                subtitle="crie seu proprio evento"
+                onPress={() => router.push('/(tabs)/profile/create-event')}
+              />
+             
+            </View>
+          </View>
           <View className="w-full items-start h-auto p-5 ">
+           
             <View>
               <Text className="text-gray-500 text-center font-semibold text-xl">
                 Minha conta
@@ -144,19 +164,19 @@ export default function Profile() {
                 icon={<User size={23} color={"#6366F1"} />}
                 title="Informações pessoais"
                 subtitle="nome, email e telefone"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/personal-info')}
               />
               <MenuItem
                 icon={<CreditCard size={23} color={"#6366F1"} />}
                 title="Metodos de pagamento"
                 subtitle="Cartão de credito e debito, pix e boleto"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/payment-methods')}
               />
               <MenuItem
                 icon={<MapPin size={23} color={"#6366F1"} />}
                 title="Endereço"
                 subtitle="Endereços de cobrança"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/address')}
               />
             </View>
           </View>
@@ -172,19 +192,19 @@ export default function Profile() {
                 icon={<Bell size={23} color={"#6366F1"} />}
                 title="Notificação"
                 subtitle="Eventos e Lembretes"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/notifications')}
               />
               <MenuItem
                 icon={<Globe size={23} color={"#6366F1"} />}
                 title="Idioma"
                 subtitle="Português"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/language')}
               />
               <MenuItem
                 icon={<Shield size={23} color={"#6366F1"} />}
                 title="Politica de privacidade"
                 subtitle="Dados e segurança"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/privacy-policy')}
               />
             </View>
           </View>
@@ -200,18 +220,18 @@ export default function Profile() {
                 icon={<CircleQuestionMark size={23} color={"#6366F1"} />}
                 title="Central de ajuda"
                 subtitle="FAQ e guias"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/support-center')}
               />
               <MenuItem
                 icon={<MessageSquareWarning size={23} color={"#6366F1"} />}
                 title="Contate-nos"
                 subtitle="Suporte ao cliente"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/contact-us')}
               />
               <MenuItem
                 icon={<Sparkles size={23} color={"#6366F1"} />}
                 title="Avalie o aplicativo"
-                onPress={() => handleMenuPress("profile")}
+                onPress={() => router.push('/(tabs)/profile/rate-app')}
               />
             </View>
           </View>
