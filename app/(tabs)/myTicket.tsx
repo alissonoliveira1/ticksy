@@ -148,11 +148,11 @@ export default function MyTicket() {
           </View>
         </View>
 
-        <View className="w-full  bg-white border border-gray-100   pt-4">
-          <View className="w-full  mt-4  justify-center items-center">
-            <View className="w-10/12  ">
+        <View className="w-full bg-white border border-gray-100 pt-4">
+          <View className="w-full mt-4 justify-center items-center">
+            <View className="w-10/12">
               <Input
-                className="border border-gray-300  bg-white/50"
+                className="border border-gray-300 bg-white/50"
                 variant="rounded"
                 size="xl"
                 isDisabled={false}
@@ -164,6 +164,7 @@ export default function MyTicket() {
                     size={20}
                     className="text-gray-400"
                     color={"#9ca3af"}
+
                   />
                 </View>
                 <InputField placeholder="Pesquisar ingressos..." />

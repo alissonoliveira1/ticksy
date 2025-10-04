@@ -4,8 +4,9 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { Input, InputField } from "@/components/ui/input";
+import dayjs from "dayjs";
 import { LinearGradient } from "expo-linear-gradient";
-import { Calendar, Camera, ChevronDown, Funnel } from "lucide-react-native";
+import { Calendar, Camera, ChevronDown } from "lucide-react-native";
 import { useState } from "react";
 import { ScrollView, Switch, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,7 +14,6 @@ import DateTimePicker, {
   DateType,
   useDefaultStyles,
 } from "react-native-ui-datepicker";
-import dayjs from "dayjs";
 export default function PersonalInfo() {
   const [isEnabled, setIsEnabled] = useState(false);
   const defaultStyles = useDefaultStyles();
@@ -32,17 +32,13 @@ export default function PersonalInfo() {
               className=" p-5 flex-row items-center rounded-b-[3rem] "
               style={{ flex: 1 }}
             >
-              <View className="items-center justify-center h-20 flex-1">
-                <View className="pb-4">
+              <View className="items-center justify-center  flex-1">
+                <View className="pb-1">
                   <Text className="text-white font-bold text-xl">
                     Informações Pessoais
                   </Text>
                 </View>
-                <View className=" w-full  items-center ">
-                  <Text className="text-gray-200 font-center font-bold text-sm">
-                    Atualize suas informações pessoais aqui
-                  </Text>
-                </View>
+                
               </View>
             </LinearGradient>
           </View>
