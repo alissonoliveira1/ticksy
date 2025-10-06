@@ -29,7 +29,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 interface MenuItemProps {
   icon: React.ReactNode;
   title: string;
@@ -69,10 +68,12 @@ export default function Index() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
+
+     <View className="flex-1 bg-gray-50">
+ <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="relative" style={styles.container}>
+        <View className="flex-1 bg-gray-50">
+          <View className="relative" style={styles.container}>
           <View className=" w-full h-auto   rounded-b-[3rem] overflow-hidden">
             <LinearGradient
               colors={["#6366F1", "#8B5CF6"]}
@@ -244,8 +245,10 @@ export default function Index() {
             />
           </View>
         </View>
+        </View>
       </ScrollView>
-    </SafeAreaView>
+     </View>
+
   );
 }
 const styles = StyleSheet.create({

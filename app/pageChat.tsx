@@ -5,7 +5,6 @@ import { StatusBar } from "expo-status-bar";
 import { SearchIcon } from "lucide-react-native";
 import { useState } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const mockChats = [
   { id: "1", name: "Alice Souza", profileImg: "", lastMessage: "Hey, how are you?" },
@@ -59,9 +58,10 @@ export default function PageChat() {
   );
 
   return (
-    <SafeAreaView className="flex-1">
-      <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
-      <View>
+ 
+     
+      <View className="flex-1 bg-gray-50"> 
+        <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
         <View className="w-full ">
           <View className=" flex-row bg-transparent rounded-b-[3rem] overflow-hidden">
             <LinearGradient
@@ -109,6 +109,6 @@ export default function PageChat() {
           <FlatList data={mockChats} renderItem={renderChatItem} />
         </View>
       </View>
-    </SafeAreaView>
+    
   );
 }

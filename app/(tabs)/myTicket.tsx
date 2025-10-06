@@ -129,7 +129,8 @@ export default function MyTicket() {
   return (
     <SafeAreaView className="flex-1  bg-gray-50">
       <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
-      <ScrollView className="h-auto" showsVerticalScrollIndicator={false}>
+      <ScrollView  contentContainerStyle={{ paddingBottom: 90 }}
+    className="flex-col">
         <View className="w-full">
           <View className=" flex-row rounded-b-[3rem] overflow-hidden">
             <LinearGradient

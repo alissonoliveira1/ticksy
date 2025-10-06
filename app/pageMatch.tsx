@@ -4,14 +4,14 @@ import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { ArrowLeft, Heart, MessageCircle, Star, X } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PageMatch() {
   const { id } = useLocalSearchParams<{ id: string }>();
   return (
-    <SafeAreaView className="flex-1">
+
+     
+      <View className="flex-1 bg-gray-50"> 
       <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
-      <View className="flex-1 ">
         <View className="w-full h-32 z-10 overflow-hidden absolute top-0">
           <LinearGradient
             style={{
@@ -127,6 +127,6 @@ export default function PageMatch() {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+   
   );
 }

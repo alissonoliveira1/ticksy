@@ -11,7 +11,6 @@ import { StatusBar } from "expo-status-bar";
 import { ChevronDown, MapPin, SearchIcon } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const [featuredEvents, setFeaturedEvents] = useState<Event[]>([]);
@@ -62,12 +61,8 @@ export default function Index() {
   }, [category]);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "#f9fafb",
-      }}
-    >
+    <View className="flex-1  bg-gray-50">
+
       {activeErros ? <AlertUi erros={erros} /> : null}
       <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <ScrollView
@@ -144,6 +139,7 @@ export default function Index() {
         setActive={setActive}
         setSelectedLocation={setSelectedLocation}
       />
-    </SafeAreaView>
+    </View>
+  
   );
 }

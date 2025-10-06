@@ -8,7 +8,6 @@ import { router } from "expo-router";
 import { ArrowLeft, LayoutGrid, List, SearchIcon } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Search() {
   const [category, setCategory] = useState("all");
@@ -38,9 +37,9 @@ export default function Search() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+
       <ScrollView>
-        <View>
+        <View className="flex-1 bg-gray-50">
           <View className="w-full">
             <View className=" flex-row rounded-b-[3rem] overflow-hidden">
               <LinearGradient
@@ -126,6 +125,6 @@ export default function Search() {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+ 
   );
 }

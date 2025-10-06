@@ -15,7 +15,7 @@ export default function Layout() {
       <Stack.Screen name="contact-us" options={{headerShown:false, title: 'pesquisa' }} />
       <Stack.Screen name="create-event" options={{headerShown:false, title: 'Match' }} />
       <Stack.Screen name="language" options={{headerShown:false, title: 'Match' }} />
-      <Stack.Screen name="notification" options={{headerShown:false, title: 'Match' }} />
+      <Stack.Screen name="notifications" options={{headerShown:false, title: 'Match' }} />
       <Stack.Screen name="payment-methods" options={{headerShown:false, title: 'Match' }} />
       <Stack.Screen name="personal-info" options={{headerShown:false, title: 'Match' }} />
       <Stack.Screen name="privacy-policy" options={{headerShown:false, title: 'Match' }} />

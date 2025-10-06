@@ -7,7 +7,6 @@ import { StatusBar } from "expo-status-bar";
 import { CalendarDays, Heart, MapPin, UsersRound } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 export default function TicksyConnect() {
 const [data,setData] = useState<Event[]>([])
 const [loading,setLoading] = useState(false)
@@ -101,8 +100,9 @@ useEffect(() => {
 
 
   return (
-    <SafeAreaView>
-      <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
+  
+      <View className="flex-1 bg-gray-50">
+        <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <View className="w-full ">
         <View className=" flex-row bg-transparent rounded-b-[3rem] overflow-hidden">
           <LinearGradient
@@ -136,7 +136,8 @@ useEffect(() => {
               
             />
           </View>
+      </View>
     
-    </SafeAreaView>
+ 
   );
 }

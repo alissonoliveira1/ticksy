@@ -32,7 +32,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 interface TicketType {
   id: string;
   name: string;
@@ -151,8 +150,9 @@ export default function TicketDetails() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      {scrollY >= 190 ? (
+
+     <View className="flex-1 bg-gray-50">
+       {scrollY >= 190 ? (
         <View className="absolute top-8 left-0 right-0 w-full flex-row  p-2 justify-between z-10">
           <TouchableOpacity
             className="rounded-full items-center justify-center w-10 h-10 bg-black/20 left-0 top-0 p-2"
@@ -356,7 +356,8 @@ export default function TicketDetails() {
             </View>
            </View>
           </View>) : null}
-    </SafeAreaView>
+     </View>
+ 
   );
 }
 const styles = StyleSheet.create({
