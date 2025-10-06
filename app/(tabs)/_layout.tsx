@@ -5,7 +5,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { Tabs } from "expo-router";
-import { House, Ticket, Users } from "lucide-react-native";
+import { Globe, House, Ticket } from "lucide-react-native";
 import "../../global.css";
 export default function TabLayout() {
   return (
@@ -30,7 +30,7 @@ export default function TabLayout() {
         name="ticksyConnect"
         options={{
           title: "Connect",
-          tabBarIcon: ({ color }) => <Users color={color} size={20} />,
+          tabBarIcon: ({ color }) => <Globe color={color} size={20} />,
         }}
       />
       <Tabs.Screen

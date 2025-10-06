@@ -4,10 +4,41 @@ import { Input, InputField } from "@/components/ui/input";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { ChevronDown, ChevronUp, Mail, MessageSquareMore, Phone, SearchIcon } from "lucide-react-native";
+import { Fragment, useState } from "react";
 import { Text, View } from "react-native";
 
 export default function SupportCenter() {
+  const [openItem, setOpenItem] = useState<string | null>(null);
 
+   const reiItens = [
+            {
+              value: "a",
+              title: "Como posso transferir meu ingresso?",
+              content:
+                "Para transferir um ingresso, acesse 'Meus Ingressos', selecione o ingresso desejado e toque em 'Transferir'. Digite o email da pessoa que receberá o ingresso.",
+            },
+            {
+              value: "b",
+              title: "O que é o Connect Match?",
+              content:
+                "Connect Match é nosso sistema que conecta pessoas que vão ao mesmo evento. Você pode conhecer pessoas com interesses similares e compartilhar experiências.",
+            },
+            {
+              value: "c",
+              title: "Como alterar minha forma de pagamento?",
+              content:
+                "Vá em Perfil e depois em Métodos de Pagamento. Você pode adicionar novos cartões, definir um padrão ou remover métodos antigos.",
+            },
+            {
+              value: "d",
+              title: "Posso cancelar meu ingresso?",
+              content:
+                "O cancelamento depende da política do evento. Verifique os detalhes do seu ingresso ou entre em contato com o organizador.",
+            },
+          ]
+  const handleToggle = (value: string) => {
+    setOpenItem((prev) => (prev === value ? null : value));
+  };
   return (
    <View className="flex-1 bg-gray-100">
     <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
@@ -52,21 +83,21 @@ export default function SupportCenter() {
             <View className=" w-32 h-24 mt-4  bg-white items-center justify-center rounded-xl">
               <View className="bg-indigo-500/10 p-3 mb-2 rounded-[20rem] ">
               <MessageSquareMore size={20} color="#6366F1" /></View>
-              <Text className="text-gray-600 text-sm font-semibold text-center">
+              <Text className="text-gray-500 text-sm font-semibold text-center">
                 Chat ao vivo
                 </Text>
                 </View>
                 <View className=" w-32 h-24  mt-4  bg-white items-center justify-center rounded-xl">
                   <View className="bg-indigo-500/10 p-3 mb-2 rounded-[20rem] ">
                   <Mail size={20} color="#6366F1" /></View>
-              <Text className="text-gray-600 text-sm font-semibold text-center">
+              <Text className="text-gray-500 text-sm font-semibold text-center">
                 Enviar Email
                 </Text>
                 </View>
                 <View className=" w-32 h-24  mt-4  items-center bg-white justify-center  rounded-xl">
                   <View className="bg-indigo-500/10 p-3 mb-2 rounded-[20rem] ">
                   <Phone size={20} color="#6366F1" /></View>
-              <Text className="text-gray-600 text-sm font-semibold text-center">
+              <Text className="text-gray-500 text-sm font-semibold text-center">
                 Telefone
                 </Text>
                 </View>
@@ -79,112 +110,57 @@ export default function SupportCenter() {
       type="single"
       isCollapsible={true}
       isDisabled={false}
-      className="m-5 w-[100%] border border-outline-200"
+      className="m-5 w-[100%] border py-2 border-gray-200"
     >
-      <AccordionItem value="a">
+     {reiItens.map((item, i) => (
+      <Fragment key={item.value}>
+ <AccordionItem value={item.value } key={item.value} >
         <AccordionHeader>
-          <AccordionTrigger>
-            {({ isExpanded2 }:any) => {
-              return (
+          <AccordionTrigger onPress={() => handleToggle(item.value)}>
+          
+            
                 <>
-                  <AccordionTitleText>
-                    Como posso transferir meu ingresso?
+                  <AccordionTitleText className="text-gray-500">
+                    {item.title}
                   </AccordionTitleText>
-                  {isExpanded2 ? (
+                  {openItem === item.value ?(
                     <AccordionIcon as={ChevronUp} className="ml-3" />
                   ) : (
                     <AccordionIcon as={ChevronDown} className="ml-3" />
                   )}
                 </>
-              );
-            }}
+         
+           
           </AccordionTrigger>
         </AccordionHeader>
-        <AccordionContent>
-          <AccordionContentText>
-           Para transferir um ingresso, acesse "Meus Ingressos", selecione o ingresso desejado e toque em "Transferir". Digite o email da pessoa que receberá o ingresso.
-          </AccordionContentText>
-        </AccordionContent>
+         {openItem === item.value && (
+                  <AccordionContent>
+                    <AccordionContentText>{item.content}</AccordionContentText>
+                  </AccordionContent>
+                )}
       </AccordionItem>
-      <Divider />
-      <AccordionItem value="b">
-        <AccordionHeader>
-          <AccordionTrigger>
-            {({ isExpanded }:any) => {
-              return (
-                <>
-                  <AccordionTitleText>
-                    O que é o Connect Match?
-                  </AccordionTitleText>
-                  {isExpanded ? (
-                    <AccordionIcon as={ChevronUp} className="ml-3" />
-                  ) : (
-                    <AccordionIcon as={ChevronDown} className="ml-3" />
-                  )}
-                </>
-              );
-            }}
-          </AccordionTrigger>
-        </AccordionHeader>
-        <AccordionContent>
-          <AccordionContentText>
-            Connect Match é nosso sistema que conecta pessoas que vão ao mesmo evento. Você pode conhecer pessoas com interesses similares e compartilhar assentos ou experiencias.
-          </AccordionContentText>
-        </AccordionContent>
-      </AccordionItem>
-      <Divider />
-      <AccordionItem value="c">
-        <AccordionHeader>
-          <AccordionTrigger>
-            {({ isExpanded }:any) => {
-              return (
-                <>
-                  <AccordionTitleText>
-                    Como alterar minha forma de pagamento?
-                  </AccordionTitleText>
-                  {isExpanded ? (
-                    <AccordionIcon as={ChevronUp} className="ml-3" />
-                  ) : (
-                    <AccordionIcon as={ChevronDown} className="ml-3" />
-                  )}
-                </>
-              );
-            }}
-          </AccordionTrigger>
-        </AccordionHeader>
-        <AccordionContent>
-          <AccordionContentText>
-           Vá em Perfil e depois em Métodos de Pagamento. Você pode adicionar novos cartões, definir um padrão ou remover métodos antigos.
-          </AccordionContentText>
-        </AccordionContent>
-      </AccordionItem>
-      <Divider />
-      <AccordionItem value="d">
-        <AccordionHeader>
-          <AccordionTrigger>
-            {({ isExpanded }:any) => {
-              return (
-                <>
-                  <AccordionTitleText>
-                    Posso cancelar meu ingresso?
-                  </AccordionTitleText>
-                  {isExpanded ? (
-                    <AccordionIcon as={ChevronUp} className="ml-3" />
-                  ) : (
-                    <AccordionIcon as={ChevronDown} className="ml-3" />
-                  )}
-                </>
-              );
-            }}
-          </AccordionTrigger>
-        </AccordionHeader>
-        <AccordionContent>
-          <AccordionContentText>
-            O cancelamento depende da política do evento. Verifique os detalhes do seu ingresso ou entre em contato com o organizador.
-          </AccordionContentText>
-        </AccordionContent>
-      </AccordionItem>
+      {i < 3 && <Divider />}
+     </Fragment>
+     ))}
+   
+      
     </Accordion>
+          </View>
+          <View>
+            <Text className="text-gray-500 font-semibold text-center mb-5">
+              Ainda precisa de ajuda?
+            </Text>
+            <View className=" justify-center items-center m">
+              <Text className="text-gray-400 font-bold text-sm">
+              Nossa equipe está disponível para ajudar você
+            </Text>
+            </View>
+           <View className="flex-row gap-2 justify-center items-center mt-2">
+            <Mail color={"#6366F1"} size={20} />
+            <Text className="text-indigo-500 font-semibold">
+            Ticksyhelp@gmail.com
+           </Text>
+           </View>
           </View>
    </View>
   );

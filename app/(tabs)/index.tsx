@@ -76,10 +76,10 @@ export default function Index() {
               className=" p-5  items-center justify-between flex-row rounded-b-[3rem] "
               style={{ flex: 1 }}
             >
-              <View>
+              <View className="pt-5 w-full flex-row justify-between">
                 <TouchableOpacity
                   activeOpacity={1}
-                  className="flex-row gap-2 bg-black/20 mt-3 px-4 py-2 items-center rounded-full border border-gray-200"
+                  className="flex-row gap-2 bg-black/10 mt-3 px-4 py-2 items-center rounded-full border border-gray-200"
                   onPress={() => setActive(true)}
                 >
                   <MapPin color={"#f9fafb"} size={17} />
@@ -91,11 +91,11 @@ export default function Index() {
                   <ChevronDown color={"#f9fafb"} size={17} />
                 </TouchableOpacity>
                 <View></View>
-              </View>
+              
 
               <TouchableOpacity
                 onPress={() => router.push("/search")}
-                className=" bg-black/20  flex-row  
+                className=" bg-black/10  flex-row  
                 items-center rounded-full border h-auto 
                 mt-3 px-4 py-2 overflow-hidden border-gray-200"
               >
@@ -104,6 +104,7 @@ export default function Index() {
                   <Text className="text-white text-sm">Buscar eventos</Text>
                 </View>
               </TouchableOpacity>
+              </View>
             </LinearGradient>
           </View>
         </View>

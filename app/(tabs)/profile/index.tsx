@@ -80,7 +80,7 @@ export default function Index() {
               className=" p-5 flex-row items-center rounded-b-[3rem] "
               style={{ flex: 1 }}
             >
-              <View style={styles.containerProfile}>
+              <View className="pt-5" style={styles.containerProfile}>
                 <Avatar size="md">
                   <AvatarFallbackText>Jane Doe</AvatarFallbackText>
                   <AvatarImage
@@ -103,7 +103,7 @@ export default function Index() {
                 </View>
               </View>
               <View>
-                <View>
+                <View className="pt-5">
                   <Pencil size={20} color={"white"} />
                 </View>
               </View>
