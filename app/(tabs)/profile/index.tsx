@@ -13,14 +13,11 @@ import {
   ChevronRight,
   CircleQuestionMark,
   CreditCard,
-  Globe,
   LogOut,
-  MapPin,
-  MessageSquareWarning,
-  Pencil,
+  Plus,
   Shield,
-  Sparkles,
-  User,
+  Sun,
+  User
 } from "lucide-react-native";
 import {
   ScrollView,
@@ -82,7 +79,7 @@ export default function Index() {
             >
               <View className="pt-5" style={styles.containerProfile}>
                 <Avatar size="md">
-                  <AvatarFallbackText>Jane Doe</AvatarFallbackText>
+                  <AvatarFallbackText>Alisson Oliveira</AvatarFallbackText>
                   <AvatarImage
                     source={{
                       uri: "https://i.ibb.co/mC3m3gFF/00100s-PORTRAIT-00100-BURST20220226153400411-COVER.jpg",
@@ -104,7 +101,7 @@ export default function Index() {
               </View>
               <View>
                 <View className="pt-5">
-                  <Pencil size={20} color={"white"} />
+                  <Sun size={20} color={"white"} />
                 </View>
               </View>
             </LinearGradient>
@@ -138,20 +135,29 @@ export default function Index() {
  <View className="w-full items-start h-auto p-5 ">
             
             
-            <View>
-              <Text className="text-gray-500 text-center font-semibold text-xl">
+            <LinearGradient
+             colors={["#8B5CF6","#6366F1" ]}
+             style={{ borderRadius: 15 }}
+             className="w-full h-32  p-4 flex-col items-center justify-center elevation-md]"
+            >
+              <View className="flex-row items-center justify-start w-full gap-3 pb-3">
+                <View>
+                  <CalendarPlus size={25} color={"white"} />
+                </View>
+                <View className="flex-col items-start justify-start">
+              <Text className="text-white text-center font-semibold text-xl pb-0.5">
                 Organizador
               </Text>
+              <Text className="text-gray-100 text-center   text-sm">
+                Crie seu proprio evento
+              </Text>
             </View>
-            <View className="w-full">
-              <MenuItem
-                icon={<CalendarPlus size={23} color={"#6366F1"} />}
-                title="Criar evento"
-                subtitle="crie seu proprio evento"
-                onPress={() => router.push('/(tabs)/profile/create-event')}
-              />
-             
-            </View>
+              </View>
+            <TouchableOpacity onPress={() => router.push('/(tabs)/profile/create-event')  }className="w-full flex-row items-center justify-center bg-white/20 rounded-full h-11 gap-2">
+             <Plus size={23} color={"white"} />
+             <Text className="text-white text-lg font-semibold">Criar evento</Text>
+            </TouchableOpacity>
+            </LinearGradient>
           </View>
           <View className="w-full items-start h-auto p-5 ">
            
@@ -173,12 +179,7 @@ export default function Index() {
                 subtitle="Cartão de credito e debito, pix e boleto"
                 onPress={() => router.push('/(tabs)/profile/payment-methods')}
               />
-              <MenuItem
-                icon={<MapPin size={23} color={"#6366F1"} />}
-                title="Endereço"
-                subtitle="Endereços de cobrança"
-                onPress={() => router.push('/(tabs)/profile/address')}
-              />
+             
             </View>
           </View>
 
@@ -195,12 +196,7 @@ export default function Index() {
                 subtitle="Eventos e Lembretes"
                 onPress={() => router.push('/(tabs)/profile/notifications')}
               />
-              <MenuItem
-                icon={<Globe size={23} color={"#6366F1"} />}
-                title="Idioma"
-                subtitle="Português"
-                onPress={() => router.push('/(tabs)/profile/language')}
-              />
+             
               <MenuItem
                 icon={<Shield size={23} color={"#6366F1"} />}
                 title="Politica de privacidade"
@@ -223,17 +219,7 @@ export default function Index() {
                 subtitle="FAQ e guias"
                 onPress={() => router.push('/(tabs)/profile/support-center')}
               />
-              <MenuItem
-                icon={<MessageSquareWarning size={23} color={"#6366F1"} />}
-                title="Contate-nos"
-                subtitle="Suporte ao cliente"
-                onPress={() => router.push('/(tabs)/profile/contact-us')}
-              />
-              <MenuItem
-                icon={<Sparkles size={23} color={"#6366F1"} />}
-                title="Avalie o aplicativo"
-                onPress={() => router.push('/(tabs)/profile/rate-app')}
-              />
+              
             </View>
           </View>
           <View className="w-full items-start h-auto p-5 ">
