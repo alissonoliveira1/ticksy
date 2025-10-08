@@ -5,6 +5,7 @@
   },
   "app": {
     "entry": "app/_layout.tsx",
-    "components": "components/ui"
+    "components": "components/ui",
+    "screens": "screens/**/*.{js,jsx,ts,tsx}"
   }
 }
