@@ -4,7 +4,7 @@ import { InformationBasic } from "@/screens/createEvent/steps/informationBasic";
 import { StepDateHours } from "@/screens/createEvent/steps/StepDateHours";
 import { StepLocal } from "@/screens/createEvent/steps/StepLocal";
 import { StepPagaments } from "@/screens/createEvent/steps/StepPagaments";
-import { StepResume } from "@/screens/createEvent/steps/stepResume";
+import { StepResume } from "@/screens/createEvent/steps/StepResume";
 import { StepTicket } from "@/screens/createEvent/steps/StepTicket";
 import { StepVisual } from "@/screens/createEvent/steps/StepVisual";
 import { LinearGradient } from "expo-linear-gradient";
