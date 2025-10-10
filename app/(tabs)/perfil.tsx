@@ -33,7 +33,7 @@ interface MenuItemProps {
   onPress: () => void;
   showArrow?: boolean;
 }
-export default function Index() {
+export default function Perfil() {
   const handleMenuPress = (item: string) => {
     console.log(`Menu sélectionné: ${item}`);
   };
@@ -153,7 +153,7 @@ export default function Index() {
               </Text>
             </View>
               </View>
-            <TouchableOpacity onPress={() => router.push('/(tabs)/profile/create-event')  }className="w-full flex-row items-center justify-center bg-white/20 rounded-full h-11 gap-2">
+            <TouchableOpacity onPress={() => router.push('/profile/create-event')  }className="w-full flex-row items-center justify-center bg-white/20 rounded-full h-11 gap-2">
              <Plus size={23} color={"white"} />
              <Text className="text-white text-lg font-semibold">Criar evento</Text>
             </TouchableOpacity>
@@ -171,13 +171,13 @@ export default function Index() {
                 icon={<User size={23} color={"#6366F1"} />}
                 title="Informações pessoais"
                 subtitle="nome, email e telefone"
-                onPress={() => router.push('/(tabs)/profile/personal-info')}
+                onPress={() => router.push('/profile/personal-info')}
               />
               <MenuItem
                 icon={<CreditCard size={23} color={"#6366F1"} />}
                 title="Metodos de pagamento"
                 subtitle="Cartão de credito e debito, pix e boleto"
-                onPress={() => router.push('/(tabs)/profile/payment-methods')}
+                onPress={() => router.push('/profile/payment-methods')}
               />
              
             </View>
@@ -194,14 +194,14 @@ export default function Index() {
                 icon={<Bell size={23} color={"#6366F1"} />}
                 title="Notificação"
                 subtitle="Eventos e Lembretes"
-                onPress={() => router.push('/(tabs)/profile/notifications')}
+                onPress={() => router.push('/profile/notifications')}
               />
              
               <MenuItem
                 icon={<Shield size={23} color={"#6366F1"} />}
                 title="Politica de privacidade"
                 subtitle="Dados e segurança"
-                onPress={() => router.push('/(tabs)/profile/privacy-policy')}
+                onPress={() => router.push('/profile/privacy-policy')}
               />
             </View>
           </View>
@@ -217,7 +217,7 @@ export default function Index() {
                 icon={<CircleQuestionMark size={23} color={"#6366F1"} />}
                 title="Central de ajuda"
                 subtitle="FAQ e guias"
-                onPress={() => router.push('/(tabs)/profile/support-center')}
+                onPress={() => router.push('/profile/support-center')}
               />
               
             </View>

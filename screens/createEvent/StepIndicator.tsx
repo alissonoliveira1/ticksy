@@ -1,12 +1,12 @@
 import {
-    Check,
-    ClipboardList,
-    Clock,
-    Cog,
-    DollarSign,
-    MapPin,
-    Palette,
-    Tickets,
+  Check,
+  ClipboardList,
+  Clock,
+  Cog,
+  DollarSign,
+  MapPin,
+  Palette,
+  Tickets,
 } from "lucide-react-native";
 import { ScrollView, Text, View } from "react-native";
 
@@ -24,7 +24,7 @@ export const StepIndicator = ({ step, total }: any) => {
   return (
     <View>
       <ScrollView horizontal>
-        <View className="flex-row items-center gap-3 bg-gray-300 w-full p-4 ">
+        <View className="flex-row items-center gap-3  w-full p-4 ">
           {StepItem.map((item, index) => (
            <View className="flex-row items-center" key={index}>
              <View

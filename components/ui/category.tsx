@@ -59,10 +59,10 @@ const clickCategory = (key: any) => {
             <Text
               className={`
             text-sm
-            
+            text-gray-600
             ml-1
           `}
-          style={{ color: category.key === selectedCategory ? "#ffffff" : getCategoryColor(category.key)[1] }}
+          
             >
               {category.label}
             </Text>

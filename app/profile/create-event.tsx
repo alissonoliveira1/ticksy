@@ -9,7 +9,7 @@ import { StepTicket } from "@/screens/createEvent/steps/StepTicket";
 import { StepVisual } from "@/screens/createEvent/steps/StepVisual";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { Button, ScrollView, Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 
 export default function CreateEvent() {
@@ -25,8 +25,8 @@ export default function CreateEvent() {
     <StepResume key="7" event={event} />,
   ];
   return (
-    <View>
-      <ScrollView>
+    <View className=" bg-gray-50">
+     
         <View className="w-full ">
           <View className=" flex-row bg-transparent rounded-b-[3rem] overflow-hidden">
             <LinearGradient
@@ -47,26 +47,28 @@ export default function CreateEvent() {
         
        
 
-       <View className="flex-1 bg-white">
+       <View className=" w-full h-screen ">
       <StepIndicator step={step} total={steps.length} />
       {steps[step]}
 
     
-      <View className="flex-row justify-between p-4">
+     <View className="bottom-12 pb-3 absolute w-full bg-white border-t border-gray-200 elevation-sm">
+       <View className="flex-row flex-1  justify-between px-5 py-3">
         {step > 0 && (
-          <Button title="Voltar" onPress={() => setStep(step - 1)} />
+          <TouchableOpacity activeOpacity={1} className="px-5 rounded-md elevation-sm py-3 bg-indigo-500" onPress={() => setStep(step - 1)} ><Text className="text-white font-semibold " >Voltar</Text></TouchableOpacity>
         )}
         {step < steps.length - 1 ? (
-          <Button title="Próximo" onPress={() => setStep(step + 1)} />
+          <TouchableOpacity activeOpacity={1} className="px-5 rounded-md elevation-sm py-3 bg-indigo-500" onPress={() => setStep(step + 1)} ><Text className="text-white font-semibold ">Próximo</Text></TouchableOpacity>
         ) : (
-          <Button title="Publicar Evento" onPress={() => handleSubmit()} />
+          <TouchableOpacity activeOpacity={1} className="px-5 rounded-md elevation-sm py-3 bg-indigo-500"  onPress={() => handleSubmit()} ><Text className="text-white font-semibold ">Publicar Evento</Text></TouchableOpacity>
         )}
       </View>
+     </View>
     </View>
        
      
     
-      </ScrollView>
+    
      
     </View>
   );

@@ -4,7 +4,7 @@ import { Switch, Text, View } from "react-native";
 export const StepResume = ({event, setEvent}:any) => {
     const [isEnabled, setIsEnabled] = useState(false);
   return (
-        <View className="w-full p-5 mb-10">
+        <View className="w-full bg-gray-50 p-5 mb-10">
           <View>
             <Text>Público e Regras</Text>
           </View>
