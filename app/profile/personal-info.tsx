@@ -6,7 +6,8 @@ import {
 import { Input, InputField } from "@/components/ui/input";
 import dayjs from "dayjs";
 import { LinearGradient } from "expo-linear-gradient";
-import { Calendar, Camera, ChevronDown } from "lucide-react-native";
+import { goBack } from "expo-router/build/global-state/routing";
+import { Calendar, Camera, ChevronDown, ChevronLeft } from "lucide-react-native";
 import { useState } from "react";
 import { ScrollView, Switch, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,7 +24,7 @@ export default function PersonalInfo() {
   const [menuOpen, setMenuOpen] = useState(false);
   console.log(datePickerVisible);
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-gray-50">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="w-full ">
           <View className=" flex-row bg-transparent rounded-b-[3rem] overflow-hidden">
@@ -32,7 +33,13 @@ export default function PersonalInfo() {
               className=" p-5 flex-row items-center rounded-b-[3rem] "
               style={{ flex: 1 }}
             >
-              <View className="items-center justify-center  flex-1">
+              <View className="items-center justify-center pt-8   flex-1">
+                <View className="absolute left-3 items-center  h-full top-6">
+                <TouchableOpacity onPress={goBack} className="p-2 rounded-[4rem] bg-white/20">
+                  <ChevronLeft color="#ffffff" size={24} />
+                </TouchableOpacity>
+
+              </View>
                 <View className="pb-1">
                   <Text className="text-white font-bold text-xl">
                     Informações Pessoais
@@ -311,6 +318,6 @@ export default function PersonalInfo() {
           </LinearGradient>
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 }

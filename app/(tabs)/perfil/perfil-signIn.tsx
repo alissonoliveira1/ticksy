@@ -33,7 +33,7 @@ interface MenuItemProps {
   onPress: () => void;
   showArrow?: boolean;
 }
-export default function Perfil() {
+export default function PerfilSignIn() {
   const handleMenuPress = (item: string) => {
     console.log(`Menu sélectionné: ${item}`);
   };

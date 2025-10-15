@@ -17,8 +17,7 @@ export const StepIndicator = ({ step, total }: any) => {
     { id: 3, label: "Data e Hora", icon: Clock },
     { id: 4, label: "Ingressos", icon: Tickets },
     { id: 5, label: "Pagamento", icon: DollarSign },
-    { id: 6, label: "Visual", icon: Palette },
-    { id: 7, label: "Configurações", icon: Cog },
+    { id: 6, label: "Configurações", icon: Cog },
   ];
 
   return (

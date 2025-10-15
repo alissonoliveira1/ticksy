@@ -2,10 +2,11 @@ import { Accordion, AccordionContent, AccordionContentText, AccordionHeader, Acc
 import { Divider } from '@/components/ui/divider';
 import { Input, InputField } from "@/components/ui/input";
 import { LinearGradient } from "expo-linear-gradient";
+import { goBack } from "expo-router/build/global-state/routing";
 import { StatusBar } from "expo-status-bar";
-import { ChevronDown, ChevronUp, Mail, MessageSquareMore, Phone, SearchIcon } from "lucide-react-native";
+import { ChevronDown, ChevronLeft, ChevronUp, Mail, MessageSquareMore, Phone, SearchIcon } from "lucide-react-native";
 import { Fragment, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export default function SupportCenter() {
   const [openItem, setOpenItem] = useState<string | null>(null);
@@ -41,7 +42,7 @@ export default function SupportCenter() {
   };
   return (
    <View className="flex-1 bg-gray-100">
-    <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
+
     <View className="w-full ">
             <View className=" flex-row bg-transparent rounded-b-[3rem] overflow-hidden">
               <LinearGradient
@@ -49,8 +50,14 @@ export default function SupportCenter() {
                 className=" p-5 flex-row items-center rounded-b-[3rem] "
                 style={{ flex: 1 }}
               >
-                <View className="items-center justify-center  flex-1">
-                  <View className="pb-1 pt-5">
+                <View className="items-center justify-center pt-8  flex-1">
+                  <View className="absolute left-3 items-center  h-full top-6">
+                <TouchableOpacity onPress={goBack} className="p-2 rounded-[4rem] bg-white/20">
+                  <ChevronLeft color="#ffffff" size={24} />
+                </TouchableOpacity>
+
+              </View>
+                  <View className="pb-1 ">
                     <Text className="text-white font-bold text-xl">
                       Central de Suporte
                     </Text>

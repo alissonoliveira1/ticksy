@@ -26,7 +26,7 @@ export const StepDateHours = ({ event, setEvent }: any) => {
   <Text className="text-xl font-bold mb-4">Data e Horário</Text>
 
   {/* Início */}
-  <View className="mb-10">
+  <View className="mb-5">
     <Text className="mb-2 text-lg font-semibold">Início</Text>
     <View className="flex-row gap-3">
       {/* Data */}
@@ -68,7 +68,7 @@ export const StepDateHours = ({ event, setEvent }: any) => {
   </View>
 
   {/* Término */}
-  <View className="mt-10">
+  <View className="mt-5">
     <Text className="mb-2 text-lg font-semibold">Término</Text>
     <View className="flex-row gap-3">
       {/* Data */}

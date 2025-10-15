@@ -1,7 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
+import { goBack } from "expo-router/build/global-state/routing";
 import {
   Bell,
   CalendarDays,
+  ChevronLeft,
   Heart,
   Mail,
   MessageCircleMore,
@@ -10,13 +12,13 @@ import {
   Tickets,
 } from "lucide-react-native";
 import { useState } from "react";
-import { ScrollView, Switch, Text, View } from "react-native";
+import { ScrollView, Switch, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Notification() {
   const [isEnabled, setIsEnabled] = useState(false);
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-gray-50">
       <ScrollView showsVerticalScrollIndicator={false}>
       <View className="w-full ">
         <View className=" flex-row bg-transparent rounded-b-[3rem] overflow-hidden">
@@ -25,7 +27,13 @@ export default function Notification() {
             className=" p-5 flex-row items-center rounded-b-[3rem] "
             style={{ flex: 1 }}
           >
-            <View className="items-center justify-center  flex-1">
+            <View className="items-center justify-center pt-8 flex-1">
+              <View className="absolute left-3 items-center  h-full top-6">
+                <TouchableOpacity onPress={goBack} className="p-2 rounded-[4rem] bg-white/20">
+                  <ChevronLeft color="#ffffff" size={24} />
+                </TouchableOpacity>
+
+              </View>
               <View className="pb-1">
                 <Text className="text-white font-bold text-xl">
                   Notificações
@@ -328,6 +336,6 @@ export default function Notification() {
         </View>
       </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
