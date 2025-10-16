@@ -1,6 +1,7 @@
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { User, UserCircle } from "lucide-react-native";
+import { router } from "expo-router";
+import { Mail, User, UserCircle } from "lucide-react-native";
 import {
   ScrollView,
   StyleSheet,
@@ -11,7 +12,7 @@ import {
 } from "react-native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-export default function PerfilSignOut() {
+export default function PerfilSignUp() {
   return (
     <View className="flex-1 bg-gray-50">
       <LinearGradient
@@ -20,14 +21,14 @@ export default function PerfilSignOut() {
         end={{ x: 1, y: 1 }}
         style={{ flex: 1, width: windowWidth, height: windowHeight }}
       >
-        <View className="pt-16 gap-2 pb-6 items-center justify-center">
+        <View className="pt-16 gap-2  items-center justify-center">
           <Text className="text-white font-bold text-5xl">Ticksy</Text>
           <Text className="text-xs text-gray-200">
             Conecte-se através de eventos incríveis
           </Text>
         </View>
 
-        <View className="w-full  mt-16  items-center justify-center">
+        <View className="w-full  mt-12  items-center justify-center">
           <View className="w-full h-52 ">
             <Image
               style={{ width: "100%", height: "100%" }}
@@ -43,7 +44,7 @@ export default function PerfilSignOut() {
             </View>
           </View>
         </View>
-        <View className="w-full  mt-10  items-center justify-center">
+        <View className="w-full  mt-5  items-center justify-center">
           <TouchableOpacity className="w-11/12 gap-5 flex-row bg-white rounded-2xl p-4 mt-10 items-center justify-center">
             <View className="w-7 h-7 ">
               <Image
@@ -66,6 +67,12 @@ export default function PerfilSignOut() {
             </View>
             <Text className="text-black font-bold text-lg">Continuar com o Facebook</Text>
           </TouchableOpacity>
+          <TouchableOpacity className="w-11/12 gap-5 flex-row  bg-white rounded-2xl p-4 mt-4 items-center justify-center">
+           <View className="w-7 h-7 ">
+              <Mail size={28} color={"black"} />
+            </View>
+            <Text className="text-black font-bold text-lg">Entrar com o Email</Text>
+          </TouchableOpacity>
         </View>
        <View className="w-full  mt-10  items-center justify-center">
          <View className="w-11/12 flex-row items-center justify-center">
@@ -75,7 +82,7 @@ export default function PerfilSignOut() {
         </View>
        </View>
        <View className="w-full  mt-5  items-center justify-center">
-         <TouchableOpacity className="w-11/12  gap-5 flex-row  border border-white rounded-2xl p-4 mt-4 items-center justify-center">
+         <TouchableOpacity onPress={()=> router.push('/auth/SignUp')} className="w-11/12  gap-5 flex-row  border border-white rounded-2xl p-4 mt-4 items-center justify-center">
            <View className="w-7 h-7 ">
              <UserCircle size={28} color={"white"} />
             </View>

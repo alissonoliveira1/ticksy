@@ -12,6 +12,11 @@ export default function Layout() {
           options={{ headerShown: false, title: "Detalhes do Evento" }}
         />
         <Stack.Screen
+          name="auth"
+          options={{ headerShown: false, title: "Detalhes do Evento" }}
+        />
+        
+        <Stack.Screen
           name="search"
           options={{ headerShown: false, title: "pesquisa" }}
         />
