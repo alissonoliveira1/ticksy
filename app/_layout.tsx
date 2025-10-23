@@ -1,11 +1,12 @@
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 
+import { UsersProvider } from "@/context/users/UsersContext";
 import { Stack } from "expo-router";
-
 export default function Layout() {
   return (
     <GluestackUIProvider>
-      <Stack>
+    <UsersProvider>
+        <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="TicketDetails"
@@ -33,6 +34,7 @@ export default function Layout() {
           options={{ headerShown: false, title: "Criar Evento" }}
         />
       </Stack>
+    </UsersProvider>
     </GluestackUIProvider>
   );
 }

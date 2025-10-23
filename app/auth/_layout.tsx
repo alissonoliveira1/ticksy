@@ -1,8 +1,13 @@
+import { UsersProvider } from "@/context/users/UsersContext";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from "expo-router";
-
+const queryClient = new QueryClient();
 export default function Layout() {
   return (
-    <Stack>
+     <QueryClientProvider client={queryClient}>
+    <UsersProvider>
+      <Stack>
+
         <Stack.Screen
         name="signUp"
         options={{ headerShown: false, title: "pesquisa" }}
@@ -13,5 +18,7 @@ export default function Layout() {
       />
       
     </Stack>
+    </UsersProvider>
+    </QueryClientProvider>
   );
 }

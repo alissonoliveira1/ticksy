@@ -73,7 +73,7 @@ export default function CreateEvent() {
             {step < steps.length - 1 ? (
               <TouchableOpacity
                 activeOpacity={1}
-                className="px-4 items-center flex-row gap-2 rounded-md elevation-sm py-3 bg-indigo-500"
+                className={`px-4 ${step > 0 ? '' : 'flex-1 justify-center'} items-center flex-row gap-2 rounded-md elevation-sm py-3 bg-indigo-500`}
                 onPress={() => setStep(step + 1)}
               >
                 <Text className="text-white font-semibold ">Próximo</Text>

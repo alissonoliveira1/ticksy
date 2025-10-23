@@ -82,7 +82,7 @@ export default function PerfilSignUp() {
         </View>
        </View>
        <View className="w-full  mt-5  items-center justify-center">
-         <TouchableOpacity onPress={()=> router.push('/auth/SignUp')} className="w-11/12  gap-5 flex-row  border border-white rounded-2xl p-4 mt-4 items-center justify-center">
+         <TouchableOpacity onPress={()=> router.push('/auth/signUp')} className="w-11/12  gap-5 flex-row  border border-white rounded-2xl p-4 mt-4 items-center justify-center">
            <View className="w-7 h-7 ">
              <UserCircle size={28} color={"white"} />
             </View>
