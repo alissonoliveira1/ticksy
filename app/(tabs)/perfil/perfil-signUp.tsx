@@ -1,14 +1,12 @@
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
-import { Mail, User, UserCircle } from "lucide-react-native";
+import { Mail, UserCircle } from "lucide-react-native";
 import {
-  ScrollView,
-  StyleSheet,
+  Dimensions,
   Text,
   TouchableOpacity,
-  View,
-  Dimensions,
+  View
 } from "react-native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -67,7 +65,7 @@ export default function PerfilSignUp() {
             </View>
             <Text className="text-black font-bold text-lg">Continuar com o Facebook</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="w-11/12 gap-5 flex-row  bg-white rounded-2xl p-4 mt-4 items-center justify-center">
+          <TouchableOpacity onPress={() => router.push('/auth/signIn')} className="w-11/12 gap-5 flex-row  bg-white rounded-2xl p-4 mt-4 items-center justify-center">
            <View className="w-7 h-7 ">
               <Mail size={28} color={"black"} />
             </View>

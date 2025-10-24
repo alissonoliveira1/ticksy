@@ -1,18 +1,18 @@
 import { auth } from "@/services/firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-    onAuthStateChanged,
-    signInWithCustomToken,
-    signOut,
-    User,
+  onAuthStateChanged,
+  signInWithCustomToken,
+  signOut,
+  User,
 } from "firebase/auth";
 import React, {
-    createContext,
-    ReactNode,
-    useCallback,
-    useContext,
-    useEffect,
-    useState,
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 
 
@@ -46,7 +46,7 @@ interface UsersContextType {
 const UsersContext = createContext<UsersContextType | null>(null);
 
 
-const API_URL = "http://192.168.100.6:5000";
+const API_URL = "https://ticksy-backend-ndkb.onrender.com";
 
 export const UsersProvider = ({ children }: { children: ReactNode }) => {
   const [userDate, setUserDate] = useState<Usuario | null>(null);

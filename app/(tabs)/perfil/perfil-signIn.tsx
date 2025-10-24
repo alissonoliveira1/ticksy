@@ -4,6 +4,7 @@ import {
   AvatarFallbackText,
   AvatarImage,
 } from "@/components/ui/avatar";
+import { useUsers } from "@/context/users/UsersContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -34,6 +35,7 @@ interface MenuItemProps {
   showArrow?: boolean;
 }
 export default function PerfilSignIn() {
+  const { logout } = useUsers();
   const handleMenuPress = (item: string) => {
     console.log(`Menu sélectionné: ${item}`);
   };
@@ -222,14 +224,14 @@ export default function PerfilSignIn() {
               
             </View>
           </View>
-          <View className="w-full items-start h-auto p-5 ">
+          <TouchableOpacity onPress={logout} className="w-full items-start h-auto p-5 ">
             <MenuItem
               icon={<LogOut size={23} color={"#6366F1"} />}
               title="Sair da conta"
               onPress={() => handleMenuPress("profile")}
               showArrow={false}
             />
-          </View>
+          </TouchableOpacity>
         </View>
         </View>
       </ScrollView>

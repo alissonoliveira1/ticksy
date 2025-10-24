@@ -34,7 +34,7 @@ export default function SignUp() {
     // Tipagem da mutação
     mutationFn: async (dadosForm: any) => {
       const response = await fetch(
-        "http://192.168.100.6:5000/users/criar-conta",
+        "https://ticksy-backend-ndkb.onrender.com/users/criar-conta",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -61,7 +61,7 @@ export default function SignUp() {
       if (!auth_token && data.usuario && data.usuario.customToken) {
         auth_token = data.usuario.customToken;
         console.warn(
-          "⚠️ Usando token aninhado: Confirme se o backend está retornando 'token' no nível raiz."
+          " Usando token aninhado: Confirme se o backend está retornando 'token' no nível raiz."
         );
       } 
 
@@ -70,15 +70,15 @@ export default function SignUp() {
         await loginWithCustomToken(auth_token);
 
         console.log(
-          "🎉 loginWithCustomToken foi chamado. A busca do perfil deve iniciar em seguida."
+          " loginWithCustomToken foi chamado. A busca do perfil deve iniciar em seguida."
         );
       } else {
-        console.error("❌ Token de autenticação ausente na resposta da API.");
+        console.error(" Token de autenticação ausente na resposta da API.");
       } 
       setStep(2);
     },
     onError: (error: any) => {
-      console.error("❌ Erro ao criar conta:", error.message);
+      console.error(" Erro ao criar conta:", error.message);
       Alert.alert("Erro ao criar conta", error.message); 
     },
   });
@@ -86,7 +86,7 @@ export default function SignUp() {
   const verifycode = useMutation({
     mutationFn: async (dadosForm: any) => {
       const response = await fetch(
-        "http://192.168.100.6:5000/api/verify-code",
+        "https://ticksy-backend-ndkb.onrender.com/api/verify-code",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -111,7 +111,7 @@ export default function SignUp() {
       router.push("/(tabs)");
     },
     onError: (error: any) => {
-      console.error("❌ Erro ao verificar codigo:", error.message);
+      console.error("Erro ao verificar codigo:", error.message);
       Alert.alert("Erro ao verificar código", error.message);
     },
   });
