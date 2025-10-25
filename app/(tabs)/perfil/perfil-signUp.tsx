@@ -43,7 +43,8 @@ export default function PerfilSignUp() {
           </View>
         </View>
         <View className="w-full  mt-5  items-center justify-center">
-          <TouchableOpacity className="w-11/12 gap-5 flex-row bg-white rounded-2xl p-4 mt-10 items-center justify-center">
+          <View className="flex-row justify-center items-start w-11/12">
+            <TouchableOpacity className="  bg-white rounded-2xl p-4 flex-1 items-center justify-center">
             <View className="w-7 h-7 ">
               <Image
                 style={{ width: "100%", height: "100%" }}
@@ -51,11 +52,9 @@ export default function PerfilSignUp() {
                 source={require("@/assets/images/googleIcon.png")}
               />
             </View>
-            <Text className="text-black font-bold text-lg">
-              Continuar com o Google
-            </Text>
+           
           </TouchableOpacity>
-          <TouchableOpacity className="w-11/12 gap-5 flex-row  bg-white rounded-2xl p-4 mt-4 items-center justify-center">
+          <TouchableOpacity className=" bg-white rounded-2xl p-4 flex-1 items-center justify-center">
            <View className="w-7 h-7 ">
               <Image
                 style={{ width: "100%", height: "100%" }}
@@ -63,8 +62,9 @@ export default function PerfilSignUp() {
                 source={require("@/assets/images/facebookIcon.png")}
               />
             </View>
-            <Text className="text-black font-bold text-lg">Continuar com o Facebook</Text>
+         
           </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={() => router.push('/auth/signIn')} className="w-11/12 gap-5 flex-row  bg-white rounded-2xl p-4 mt-4 items-center justify-center">
            <View className="w-7 h-7 ">
               <Mail size={28} color={"black"} />

@@ -12,13 +12,11 @@
       "supportsTablet": true
     },
     "android": {
-      
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff",
         "monochromeImage": "./assets/images/adaptive-icon.png"
       },
-      
       "edgeToEdgeEnabled": true,
       "package": "com.alissonoliveira1.ticksy"
     },

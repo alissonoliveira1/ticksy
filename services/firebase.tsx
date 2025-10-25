@@ -1,5 +1,4 @@
 // Import the functions you need from the SDKs you need
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp } from "firebase/app";
 import { getReactNativePersistence, initializeAuth } from 'firebase/auth';
@@ -9,13 +8,13 @@ import { getReactNativePersistence, initializeAuth } from 'firebase/auth';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.APIKEY,
-  authDomain: process.env.AUTHDOMAIN,
-  projectId: process.env.PROJECTID,
-  storageBucket: process.env.STORAGEBUCKET,
-  messagingSenderId: process.env.MESSAGINGSENDERID,
-  appId: process.env.APPID,
-  measurementId: process.env.MEASUREMENTID
+  apiKey: process.env.EXPO_PUBLIC_APIKEY,
+  authDomain: process.env.EXPO_PUBLIC_AUTHDOMAIN,
+  projectId: process.env.EXPO_PUBLIC_PROJECTID,
+  storageBucket: process.env.EXPO_PUBLIC_STORAGEBUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_MESSAGINGSENDERID,
+  appId: process.env.EXPO_PUBLIC_APPID,
+  measurementId: process.env.EXPO_PUBLIC_MEASUREMENTID,
 };
 
 // Initialize Firebase
