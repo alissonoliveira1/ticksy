@@ -34,7 +34,7 @@ export default function SignUp() {
     // Tipagem da mutação
     mutationFn: async (dadosForm: any) => {
       const response = await fetch(
-        "https://ticksy-backend-ndkb.onrender.com/users/criar-conta",
+        `${process.env.EXPO_PUBLIC_URL_RENDER}/users/criar-conta`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -86,7 +86,7 @@ export default function SignUp() {
   const verifycode = useMutation({
     mutationFn: async (dadosForm: any) => {
       const response = await fetch(
-        "https://ticksy-backend-ndkb.onrender.com/api/verify-code",
+        `${process.env.EXPO_PUBLIC_URL_RENDER}/api/verify-code`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

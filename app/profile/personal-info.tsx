@@ -66,7 +66,7 @@ const enviarImagem = async (uri: string) => {
     name: "profile.jpg",
   } as any);
 
-  const res = await fetch(`http://192.168.100.6:5000/users/updateIMG/${userDate?.firebase_uid}`, {
+  const res = await fetch(`${process.env.EXPO_PUBLIC_URL_RENDER}/users/updateIMG/${userDate?.firebase_uid}`, {
     method: "POST",
     body: formData,
   });

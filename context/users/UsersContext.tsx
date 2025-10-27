@@ -47,7 +47,7 @@ interface UsersContextType {
 const UsersContext = createContext<UsersContextType | null>(null);
 
 
-const API_URL = "https://ticksy-backend-ndkb.onrender.com";
+
 
 export const UsersProvider = ({ children }: { children: ReactNode }) => {
   const [userDate, setUserDate] = useState<Usuario | null>(null);
@@ -104,7 +104,7 @@ export const UsersProvider = ({ children }: { children: ReactNode }) => {
 
       try {
         console.log("Buscando dados do perfil com ID Token...");
-        const response = await fetch(`${API_URL}/auth/profile`, {
+        const response = await fetch(`${process.env.EXPO_PUBLIC_URL_RENDER}/auth/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json", 

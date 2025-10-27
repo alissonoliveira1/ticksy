@@ -37,7 +37,7 @@ export default function SignIn() {
 
     
       const response = await fetch(
-        "https://ticksy-backend-ndkb.onrender.com/auth/login",
+        `${process.env.EXPO_PUBLIC_URL_RENDER}/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
