@@ -43,7 +43,7 @@ export default function PerfilSignUp() {
           </View>
         </View>
         <View className="w-full  mt-5  items-center justify-center">
-          <View className="flex-row justify-center items-start w-11/12">
+          <View className="flex-row justify-center items-start gap-5 w-11/12">
             <TouchableOpacity className="  bg-white rounded-2xl p-4 flex-1 items-center justify-center">
             <View className="w-7 h-7 ">
               <Image

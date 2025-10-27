@@ -18,7 +18,7 @@ import {
   Plus,
   Shield,
   Sun,
-  User
+  User,
 } from "lucide-react-native";
 import {
   ScrollView,
@@ -35,7 +35,7 @@ interface MenuItemProps {
   showArrow?: boolean;
 }
 export default function PerfilSignIn() {
-  const { logout } = useUsers();
+  const { logout, userDate } = useUsers();
   const handleMenuPress = (item: string) => {
     console.log(`Menu sélectionné: ${item}`);
   };
@@ -48,7 +48,10 @@ export default function PerfilSignIn() {
     showArrow = true,
   }: MenuItemProps) {
     return (
-      <TouchableOpacity onPress={onPress} className="w-full border-gray-100 border flex-row justify-between items-center h-30  rounded-sm mt-2">
+      <TouchableOpacity
+        onPress={onPress}
+        className="w-full border-gray-100 border flex-row justify-between items-center h-30  rounded-sm mt-2"
+      >
         <View className="flex-row items-center justify-center p-3">
           <View className="pr-4 text-indigo-500">{icon}</View>
           <View>
@@ -67,176 +70,186 @@ export default function PerfilSignIn() {
   }
 
   return (
-
-     <View className="flex-1 bg-gray-50">
- <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
+    <View className="flex-1 bg-gray-50">
+      <StatusBar style="light" backgroundColor="#6366F1" translucent={false} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex-1 bg-gray-50">
           <View className="relative" style={styles.container}>
-          <View className=" w-full h-auto   rounded-b-[3rem] overflow-hidden">
-            <LinearGradient
-              colors={["#6366F1", "#8B5CF6"]}
-              className=" p-5 flex-row items-center rounded-b-[3rem] "
-              style={{ flex: 1 }}
-            >
-              <View className="pt-5" style={styles.containerProfile}>
-                <Avatar size="md">
-                  <AvatarFallbackText>Alisson Oliveira</AvatarFallbackText>
-                  <AvatarImage
-                    source={{
-                      uri: "https://i.ibb.co/mC3m3gFF/00100s-PORTRAIT-00100-BURST20220226153400411-COVER.jpg",
-                    }}
-                  />
-                  <AvatarBadge />
-                </Avatar>
-                <View style={styles.viewText}>
-                  <Text
-                    className="text-white"
-                    style={{ fontSize: 15, fontWeight: "bold" }}
-                  >
-                    Alisson de Oliveira
-                  </Text>
-                  <Text className="text-white text-xs">
-                    Alissonoliveria202020@gmail.com
-                  </Text>
+            <View className=" w-full h-auto   rounded-b-[3rem] overflow-hidden">
+              <LinearGradient
+                colors={["#6366F1", "#8B5CF6"]}
+                className=" p-5 flex-row items-center rounded-b-[3rem] "
+                style={{ flex: 1 }}
+              >
+                <View className="pt-5" style={styles.containerProfile}>
+                  <Avatar size="md">
+                    {userDate?.foto_perfil ? (
+                      <AvatarImage source={{ uri: userDate.foto_perfil }} />
+                    ) : userDate?.nome ? (
+                      <AvatarFallbackText>
+                        {`${userDate?.nome?.charAt(0) ?? ""} ${
+                          userDate?.sobrenome?.charAt(0) ?? ""
+                        }`}
+                      </AvatarFallbackText>
+                    ) : (
+                      <AvatarImage
+                        source={{
+                          uri: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+                        }}
+                      />
+                    )}
+                    <AvatarBadge />
+                  </Avatar>
+                  <View style={styles.viewText}>
+                    <Text
+                      className="text-white"
+                      style={{ fontSize: 15, fontWeight: "bold" }}
+                    >
+                      {userDate?.nome} {userDate?.sobrenome}
+                    </Text>
+                    <Text className="text-white text-xs">
+                      {userDate?.email}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              <View>
-                <View className="pt-5">
-                  <Sun size={20} color={"white"} />
-                </View>
-              </View>
-            </LinearGradient>
-          </View>
-          <View className=" rounded-3xl bottom-3 flex-row justify-around relative w-11/12 h-20 bg-white shadow-xl shadow-gray-500">
-            <View className="flex-col items-center justify-center">
-              <View>
-                <Text className="text-indigo-500 font-bold text-xl">12</Text>
-              </View>
-              <View>
-                <Text className="text-gray-500 font-semibold">Ingressos</Text>
-              </View>
-            </View>
-            <View className="flex-col items-center justify-center">
-              <View>
-                <Text className="text-indigo-500 font-bold text-xl">2</Text>
-              </View>
-              <View>
-                <Text className="text-gray-500 font-semibold">Eventos</Text>
-              </View>
-            </View>
-            <View className="flex-col items-center justify-center">
-              <View>
-                <Text className="text-indigo-500 font-bold text-xl">8</Text>
-              </View>
-              <View>
-                <Text className="text-gray-500 font-semibold">Favoritos</Text>
-              </View>
-            </View>
-          </View>
- <View className="w-full items-start h-auto p-5 ">
-            
-            
-            <LinearGradient
-             colors={["#8B5CF6","#6366F1" ]}
-             style={{ borderRadius: 15 }}
-             className="w-full h-32  p-4 flex-col items-center justify-center elevation-md]"
-            >
-              <View className="flex-row items-center justify-start w-full gap-3 pb-3">
                 <View>
-                  <CalendarPlus size={25} color={"white"} />
+                  <View className="pt-5">
+                    <Sun size={20} color={"white"} />
+                  </View>
                 </View>
-                <View className="flex-col items-start justify-start">
-              <Text className="text-white text-center font-semibold text-xl pb-0.5">
-                Organizador
-              </Text>
-              <Text className="text-gray-100 text-center   text-sm">
-                Crie seu proprio evento
-              </Text>
+              </LinearGradient>
             </View>
+            <View className=" rounded-3xl bottom-3 flex-row justify-around relative w-11/12 h-20 bg-white shadow-xl shadow-gray-500">
+              <View className="flex-col items-center justify-center">
+                <View>
+                  <Text className="text-indigo-500 font-bold text-xl">12</Text>
+                </View>
+                <View>
+                  <Text className="text-gray-500 font-semibold">Ingressos</Text>
+                </View>
               </View>
-            <TouchableOpacity onPress={() => router.push('/profile/create-event')  }className="w-full flex-row items-center justify-center bg-white/20 rounded-full h-11 gap-2">
-             <Plus size={23} color={"white"} />
-             <Text className="text-white text-lg font-semibold">Criar evento</Text>
+              <View className="flex-col items-center justify-center">
+                <View>
+                  <Text className="text-indigo-500 font-bold text-xl">2</Text>
+                </View>
+                <View>
+                  <Text className="text-gray-500 font-semibold">Eventos</Text>
+                </View>
+              </View>
+              <View className="flex-col items-center justify-center">
+                <View>
+                  <Text className="text-indigo-500 font-bold text-xl">8</Text>
+                </View>
+                <View>
+                  <Text className="text-gray-500 font-semibold">Favoritos</Text>
+                </View>
+              </View>
+            </View>
+            <View className="w-full items-start h-auto p-5 ">
+              <LinearGradient
+                colors={["#8B5CF6", "#6366F1"]}
+                style={{ borderRadius: 15 }}
+                className="w-full h-32  p-4 flex-col items-center justify-center elevation-md]"
+              >
+                <View className="flex-row items-center justify-start w-full gap-3 pb-3">
+                  <View>
+                    <CalendarPlus size={25} color={"white"} />
+                  </View>
+                  <View className="flex-col items-start justify-start">
+                    <Text className="text-white text-center font-semibold text-xl pb-0.5">
+                      Organizador
+                    </Text>
+                    <Text className="text-gray-100 text-center   text-sm">
+                      Crie seu proprio evento
+                    </Text>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  onPress={() => router.push("/profile/create-event")}
+                  className="w-full flex-row items-center justify-center bg-white/20 rounded-full h-11 gap-2"
+                >
+                  <Plus size={23} color={"white"} />
+                  <Text className="text-white text-lg font-semibold">
+                    Criar evento
+                  </Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            </View>
+            <View className="w-full items-start h-auto p-5 ">
+              <View>
+                <Text className="text-gray-500 text-center font-semibold text-xl">
+                  Minha conta
+                </Text>
+              </View>
+              <View className="w-full">
+                <MenuItem
+                  icon={<User size={23} color={"#6366F1"} />}
+                  title="Informações pessoais"
+                  subtitle="nome, email e telefone"
+                  onPress={() => router.push("/profile/personal-info")}
+                />
+                <MenuItem
+                  icon={<CreditCard size={23} color={"#6366F1"} />}
+                  title="Metodos de pagamento"
+                  subtitle="Cartão de credito e debito, pix e boleto"
+                  onPress={() => router.push("/profile/payment-methods")}
+                />
+              </View>
+            </View>
+
+            <View className="w-full items-start h-auto p-5 ">
+              <View>
+                <Text className="text-gray-500 text-center font-semibold text-xl">
+                  Preferencias
+                </Text>
+              </View>
+              <View className="w-full">
+                <MenuItem
+                  icon={<Bell size={23} color={"#6366F1"} />}
+                  title="Notificação"
+                  subtitle="Eventos e Lembretes"
+                  onPress={() => router.push("/profile/notifications")}
+                />
+
+                <MenuItem
+                  icon={<Shield size={23} color={"#6366F1"} />}
+                  title="Politica de privacidade"
+                  subtitle="Dados e segurança"
+                  onPress={() => router.push("/profile/privacy-policy")}
+                />
+              </View>
+            </View>
+
+            <View className="w-full items-start h-auto p-5 ">
+              <View>
+                <Text className="text-gray-500 text-center font-semibold text-xl">
+                  Suporte
+                </Text>
+              </View>
+              <View className="w-full">
+                <MenuItem
+                  icon={<CircleQuestionMark size={23} color={"#6366F1"} />}
+                  title="Central de ajuda"
+                  subtitle="FAQ e guias"
+                  onPress={() => router.push("/profile/support-center")}
+                />
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={logout}
+              className="w-full items-start h-auto p-5 "
+            >
+              <MenuItem
+                icon={<LogOut size={23} color={"#6366F1"} />}
+                title="Sair da conta"
+                onPress={() => handleMenuPress("profile")}
+                showArrow={false}
+              />
             </TouchableOpacity>
-            </LinearGradient>
           </View>
-          <View className="w-full items-start h-auto p-5 ">
-           
-            <View>
-              <Text className="text-gray-500 text-center font-semibold text-xl">
-                Minha conta
-              </Text>
-            </View>
-            <View className="w-full">
-              <MenuItem
-                icon={<User size={23} color={"#6366F1"} />}
-                title="Informações pessoais"
-                subtitle="nome, email e telefone"
-                onPress={() => router.push('/profile/personal-info')}
-              />
-              <MenuItem
-                icon={<CreditCard size={23} color={"#6366F1"} />}
-                title="Metodos de pagamento"
-                subtitle="Cartão de credito e debito, pix e boleto"
-                onPress={() => router.push('/profile/payment-methods')}
-              />
-             
-            </View>
-          </View>
-
-          <View className="w-full items-start h-auto p-5 ">
-            <View>
-              <Text className="text-gray-500 text-center font-semibold text-xl">
-                Preferencias
-              </Text>
-            </View>
-            <View className="w-full">
-              <MenuItem
-                icon={<Bell size={23} color={"#6366F1"} />}
-                title="Notificação"
-                subtitle="Eventos e Lembretes"
-                onPress={() => router.push('/profile/notifications')}
-              />
-             
-              <MenuItem
-                icon={<Shield size={23} color={"#6366F1"} />}
-                title="Politica de privacidade"
-                subtitle="Dados e segurança"
-                onPress={() => router.push('/profile/privacy-policy')}
-              />
-            </View>
-          </View>
-
-          <View className="w-full items-start h-auto p-5 ">
-            <View>
-              <Text className="text-gray-500 text-center font-semibold text-xl">
-                Suporte
-              </Text>
-            </View>
-            <View className="w-full">
-              <MenuItem
-                icon={<CircleQuestionMark size={23} color={"#6366F1"} />}
-                title="Central de ajuda"
-                subtitle="FAQ e guias"
-                onPress={() => router.push('/profile/support-center')}
-              />
-              
-            </View>
-          </View>
-          <TouchableOpacity onPress={logout} className="w-full items-start h-auto p-5 ">
-            <MenuItem
-              icon={<LogOut size={23} color={"#6366F1"} />}
-              title="Sair da conta"
-              onPress={() => handleMenuPress("profile")}
-              showArrow={false}
-            />
-          </TouchableOpacity>
-        </View>
         </View>
       </ScrollView>
-     </View>
-
+    </View>
   );
 }
 const styles = StyleSheet.create({

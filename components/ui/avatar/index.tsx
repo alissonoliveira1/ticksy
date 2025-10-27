@@ -1,15 +1,11 @@
 'use client';
-import { createAvatar } from '@gluestack-ui/avatar';
+import { createAvatar } from '@gluestack-ui/core/avatar/creator';
 import React from 'react';
 
 import { Image, Platform, Text, View } from 'react-native';
 
-import type { VariantProps } from '@gluestack-ui/nativewind-utils';
-import { tva } from '@gluestack-ui/nativewind-utils/tva';
-import {
-  useStyleContext,
-  withStyleContext,
-} from '@gluestack-ui/nativewind-utils/withStyleContext';
+import type { VariantProps } from '@gluestack-ui/utils/nativewind-utils';
+import { tva, useStyleContext, withStyleContext } from '@gluestack-ui/utils/nativewind-utils';
 const SCOPE = 'AVATAR';
 
 const UIAvatar = createAvatar({
@@ -21,7 +17,7 @@ const UIAvatar = createAvatar({
 });
 
 const avatarStyle = tva({
-  base: 'rounded-full justify-center items-center relative bg-primary-600 group-[.avatar-group]/avatar-group:-ml-2.5',
+  base: 'rounded-full justify-center items-center relative bg-gray-100 group-[.avatar-group]/avatar-group:-ml-2.5',
   variants: {
     size: {
       'xs': 'w-6 h-6',
@@ -35,7 +31,7 @@ const avatarStyle = tva({
 });
 
 const avatarFallbackTextStyle = tva({
-  base: 'text-typography-0 font-semibold overflow-hidden text-transform:uppercase web:cursor-default',
+  base: 'text-typography-0 text-gray-500 font-semibold overflow-hidden text-transform:uppercase web:cursor-default',
 
   parentVariants: {
     size: {
@@ -106,9 +102,17 @@ const AvatarBadge = React.forwardRef<
       {...props}
       className={avatarBadgeStyle({
         parentVariants: {
-          size: parentSize,
+          size:
+            typeof parentSize === 'string' &&
+            ['xs', 'sm', 'md', 'lg', 'xl', '2xl'].includes(parentSize)
+              ? (parentSize as 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl')
+              : undefined,
         },
-        size,
+        size:
+          typeof size === 'string' &&
+          ['xs', 'sm', 'md', 'lg', 'xl', '2xl'].includes(size)
+            ? (size as 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl')
+            : undefined,
         class: className,
       })}
     />
@@ -125,15 +129,27 @@ const AvatarFallbackText = React.forwardRef<
 >(function AvatarFallbackText({ className, size, ...props }, ref) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
+  const computedParentSize =
+    typeof parentSize === 'string' &&
+    ['xs', 'sm', 'md', 'lg', 'xl', '2xl'].includes(parentSize)
+      ? (parentSize as 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl')
+      : undefined;
+
+  const computedSize =
+    typeof size === 'string' &&
+    ['xs', 'sm', 'md', 'lg', 'xl', '2xl'].includes(size)
+      ? (size as 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl')
+      : undefined;
+
   return (
     <UIAvatar.FallbackText
       ref={ref}
       {...props}
       className={avatarFallbackTextStyle({
         parentVariants: {
-          size: parentSize,
+          size: computedParentSize,
         },
-        size,
+        size: computedSize,
         class: className,
       })}
     />

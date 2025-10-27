@@ -31,6 +31,7 @@ interface Usuario {
   data_nascimento: Date | null;
   data_criacao: Date;
   ultimo_login: Date | null;
+  genero: string | null;
 }
 
 

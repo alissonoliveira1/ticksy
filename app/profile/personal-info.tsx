@@ -4,25 +4,77 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { Input, InputField } from "@/components/ui/input";
+import { useUsers } from "@/context/users/UsersContext";
 import dayjs from "dayjs";
+import * as ImagePicker from 'expo-image-picker';
 import { LinearGradient } from "expo-linear-gradient";
 import { goBack } from "expo-router/build/global-state/routing";
 import { Calendar, Camera, ChevronDown, ChevronLeft } from "lucide-react-native";
 import { useState } from "react";
 import { ScrollView, Switch, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker, {
   DateType,
   useDefaultStyles,
 } from "react-native-ui-datepicker";
 export default function PersonalInfo() {
+    const {userDate} = useUsers()
   const [isEnabled, setIsEnabled] = useState(false);
   const defaultStyles = useDefaultStyles();
+  const [image, setImage] = useState<string | null>(null);
   const [selected, setSelected] = useState<DateType>();
   const [datePickerVisible, setDatePickerVisible] = useState(false);
-  const [selectedGenero, setSelectedGenero] = useState<string | null>("masculino");
+  const [selectedGenero, setSelectedGenero] = useState<string | null>("");
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(datePickerVisible);
+
+ const [userForm, setUserForm] = useState({
+  nome: userDate?.nome || "",
+  senha: "",
+  sobrenome: userDate?.sobrenome || "",
+  telefone: userDate?.telefone || "",
+  data_nascimento:  userDate?.data_nascimento ||   dayjs(selected).format("DD/MM/YYYY"),
+  genero: userDate?.genero || selectedGenero,
+
+});
+
+const handleChange = (key: string, value: string) => {
+  setUserForm(prev => ({
+    ...prev,
+    [key]: value,
+  }));
+};
+
+
+const selecionarImagem = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      quality: 0.7,
+    });
+
+    if (!result.canceled) {
+      const uri = result.assets[0].uri;
+      setImage(uri);
+      await enviarImagem(uri);
+    }
+  };
+ 
+
+const enviarImagem = async (uri: string) => {
+  const formData = new FormData();
+  formData.append("file", {
+    uri,
+    type: "image/jpeg",
+    name: "profile.jpg",
+  } as any);
+
+  const res = await fetch(`http://192.168.100.6:5000/users/updateIMG/${userDate?.firebase_uid}`, {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await res.json();
+  console.log("Imagem enviada:", data.imageUrl);
+};
+
   return (
     <View className="flex-1 bg-gray-50">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -52,17 +104,28 @@ export default function PersonalInfo() {
         </View>
         <View>
           <View className=" w-full justify-center items-center mt-6 mb-4">
-            <Avatar size="xl">
-              <AvatarFallbackText>Jane Doe</AvatarFallbackText>
-              <AvatarImage
-                source={{
-                  uri: "https://i.ibb.co/mC3m3gFF/00100s-PORTRAIT-00100-BURST20220226153400411-COVER.jpg",
-                }}
-              />
+         <TouchableOpacity onPress={selecionarImagem} className=" relative">
+             <Avatar size="xl">
+               {userDate?.foto_perfil ? (
+                      <AvatarImage source={{ uri:  image ? image : userDate.foto_perfil }} />
+                    ) : userDate?.nome ? (
+                      <AvatarFallbackText>
+                        {`${userDate?.nome?.charAt(0) ?? ""} ${
+                          userDate?.sobrenome?.charAt(0) ?? ""
+                        }`}
+                      </AvatarFallbackText>
+                    ) : (
+                      <AvatarImage
+                        source={{
+                          uri: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+                        }}
+                      />
+                    )}
               <View className=" bg-indigo-500 p-1 rounded-2xl absolute bottom-0 right-0">
                 <Camera size={20} color={"#ffffff"} className=" " />
               </View>
             </Avatar>
+            </TouchableOpacity>
             <View>
               <Text
                 className="text-gray-500 mt-2"
@@ -95,7 +158,11 @@ export default function PersonalInfo() {
                     isInvalid={false}
                     isReadOnly={false}
                   >
-                    <InputField placeholder="Seu nome" />
+                    <InputField
+                    value={userForm.nome  }
+                    onChangeText={(text) => handleChange("nome", text)}
+                    
+                    placeholder="Seu nome" />
                   </Input>
                 </View>
                 <View className="flex-1  m-1">
@@ -112,7 +179,10 @@ export default function PersonalInfo() {
                     isInvalid={false}
                     isReadOnly={false}
                   >
-                    <InputField placeholder="Seu sobrenome" />
+                    <InputField    
+                    value={userForm.sobrenome }
+                    onChangeText={(text) => handleChange("sobrenome", text)}
+                    placeholder="Seu sobrenome" />
                   </Input>
                 </View>
               </View>
@@ -131,7 +201,9 @@ export default function PersonalInfo() {
                     isInvalid={false}
                     isReadOnly={false}
                   >
-                    <InputField placeholder="Seu Email" />
+                    <InputField placeholder="Seu Email"
+                      value={userDate?.email }
+                    />
                   </Input>
                 </View>
               </View>
@@ -150,7 +222,10 @@ export default function PersonalInfo() {
                     isInvalid={false}
                     isReadOnly={false}
                   >
-                    <InputField placeholder="Seu numero de telefone" />
+                    <InputField
+                    value={userForm.telefone }
+                    onChangeText={(text) => handleChange("telefone", text)}
+                    placeholder="Seu numero de telefone" />
                   </Input>
                 </View>
               </View>
@@ -162,16 +237,20 @@ export default function PersonalInfo() {
                     </Text>
                   </View>
                   <TouchableOpacity onPress={() => setDatePickerVisible(true)} className=" border border-background-100 flex-row justify-between bg-white/50 rounded-lg h-12 items-center px-3">
-                    <Text className="text-lg text-gray-500">
-                      {selected ? dayjs(selected).format("DD/MM/YYYY") : "Add uma data"}
-                    </Text>
-                    <Calendar
-                      size={20}
-                      color={"#6b7280"}
-                      className=" absolute right-3 top-3"
-                      
-                    />
-                  </TouchableOpacity>
+                      <Text className="text-lg text-gray-500">
+                        {userForm.data_nascimento
+                          ? typeof userForm.data_nascimento === "string"
+                            ? userForm.data_nascimento
+                            : dayjs(userForm.data_nascimento).format("DD/MM/YYYY")
+                          : "Add uma data"}
+                      </Text>
+                      <Calendar
+                        size={20}
+                        color={"#6b7280"}
+                        className=" absolute right-3 top-3"
+                        
+                      />
+                    </TouchableOpacity>
                 </View>
                 <View className="flex-1  m-1">
                   <View>
@@ -190,7 +269,9 @@ export default function PersonalInfo() {
                         <View className=" border border-background-100 flex-row justify-between bg-white/50 rounded-lg h-12 items-center px-3 ">
                          
                           <Text className="text-lg  text-gray-500 ">
-                            {selectedGenero}
+                            {userForm.genero
+                              ? userForm.genero
+                              : "Selecione o genero"}
                           </Text>
                         <ChevronDown className=" absolute right-3 top-3" color={"#6b7280"} size={17} />
                         </View>

@@ -1,21 +1,20 @@
 import {
   Avatar,
-  AvatarBadge,
   AvatarFallbackText,
   AvatarImage,
 } from "@/components/ui/avatar";
+import { useUsers } from "@/context/users/UsersContext";
 import { Tabs } from "expo-router";
 import { Globe, House, Ticket } from "lucide-react-native";
 import "../../global.css";
 export default function TabLayout() {
+  const { userDate } = useUsers();
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         lazy: true,
         tabBarActiveTintColor: "#615FFF",
-
-   
       }}
     >
       <Tabs.Screen
@@ -46,13 +45,21 @@ export default function TabLayout() {
           title: "Perfil",
           tabBarIcon: ({ color }) => (
             <Avatar size="xs">
-              <AvatarFallbackText>Jane Doe</AvatarFallbackText>
-              <AvatarImage
-                source={{
-                  uri: "https://i.ibb.co/mC3m3gFF/00100s-PORTRAIT-00100-BURST20220226153400411-COVER.jpg",
-                }}
-              />
-              <AvatarBadge />
+              {userDate?.foto_perfil ? (
+                <AvatarImage source={{ uri: userDate.foto_perfil }} />
+              ) : userDate?.nome ? (
+                <AvatarFallbackText>
+                  {`${userDate?.nome?.charAt(0) ?? ""} ${
+                    userDate?.sobrenome?.charAt(0) ?? ""
+                  }`}
+                </AvatarFallbackText>
+              ) : (
+                <AvatarImage
+                  source={{
+                    uri: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+                  }}
+                />
+              )}
             </Avatar>
           ),
         }}
