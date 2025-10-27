@@ -30,23 +30,6 @@ export const StepLocal = ({ event, setEvent }: any) => {
         </View>
       
       <View className="bg-white p-3 rounded-md">
-        <View className="w-full pb-3 ">
-          <View>
-            <Text className="text-gray-500 font-semibold text-base mb-1">
-              Endereço completo
-            </Text>
-          </View>
-          <Input
-            className="  border border-gray-200 bg-white/50"
-            variant="outline"
-            size="xl"
-            isDisabled={false}
-            isInvalid={false}
-            isReadOnly={false}
-          >
-            <InputField placeholder="Rua, numero e bairro" />
-          </Input>
-        </View>
         <View className="flex-row justify-between gap-2 space-x-2 pb-3">
           <View className="flex-1  ">
           <View>
@@ -83,6 +66,24 @@ export const StepLocal = ({ event, setEvent }: any) => {
           </Input>
         </View>
         </View>
+        <View className="w-full pb-3 ">
+          <View>
+            <Text className="text-gray-500 font-semibold text-base mb-1">
+              Endereço completo
+            </Text>
+          </View>
+          <Input
+            className="  border border-gray-200 bg-white/50"
+            variant="outline"
+            size="xl"
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={false}
+          >
+            <InputField placeholder="Rua, numero e bairro" />
+          </Input>
+        </View>
+        
         <View className="w-full  ">
           <View>
             <Text className="text-gray-500 font-semibold text-base mb-1">

@@ -106,7 +106,7 @@ export const StepMail = ({
               setFormPassMailState({ ...formPassMailState, pass: text });
             }}
             
-            placeholder="seu@gmail.com" />
+            placeholder="sua senha" />
           </Input>)}
             />
          
@@ -128,7 +128,7 @@ export const StepMail = ({
             <InputField
             value={repeatPass}
             onChangeText={(text) => setRepeatPass(text)}
-            placeholder="seu@gmail.com" />
+            placeholder="repita sua senha" />
           </Input>
         </View>
       </View>

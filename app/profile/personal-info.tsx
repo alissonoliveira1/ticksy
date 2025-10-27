@@ -17,7 +17,7 @@ import DateTimePicker, {
   useDefaultStyles,
 } from "react-native-ui-datepicker";
 export default function PersonalInfo() {
-    const {userDate} = useUsers()
+    const {userDate, setUserDate} = useUsers()
   const [isEnabled, setIsEnabled] = useState(false);
   const defaultStyles = useDefaultStyles();
   const [image, setImage] = useState<string | null>(null);
@@ -73,6 +73,8 @@ const enviarImagem = async (uri: string) => {
 
   const data = await res.json();
   console.log("Imagem enviada:", data.imageUrl);
+  setUserDate((prev) => prev ? { ...prev, foto_perfil: data.imageUrl } : prev);
+
 };
 
   return (
@@ -309,6 +311,8 @@ const enviarImagem = async (uri: string) => {
                 </View>
               </View>
             </View>
+
+             
             <View className=" w-11/12 relative z-10 mt-10 pb-2 bg-white rounded-2xl   p-1"
               style={{ zIndex: 1, position: "relative" }}
             >

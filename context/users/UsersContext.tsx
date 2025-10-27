@@ -103,6 +103,12 @@ export const UsersProvider = ({ children }: { children: ReactNode }) => {
       }
 
       try {
+
+       const cachedUser = await AsyncStorage.getItem("userData");
+      if (cachedUser) {
+        setUserDate(JSON.parse(cachedUser));
+      }
+
         console.log("Buscando dados do perfil com ID Token...");
         const response = await fetch(`${process.env.EXPO_PUBLIC_URL_RENDER}/auth/profile`, {
           method: "GET",
@@ -134,6 +140,7 @@ export const UsersProvider = ({ children }: { children: ReactNode }) => {
         data.ultimo_login = parseDate(data.ultimo_login);
 
         setUserDate(data);
+        await AsyncStorage.setItem("userData", JSON.stringify(data));
         console.log("✅ Dados do perfil carregados para:", data.email);
       } catch (error) {
         console.error(
